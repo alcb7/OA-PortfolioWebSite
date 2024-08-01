@@ -1,0 +1,6 @@
+@OA.PortfolioWebSite.AuthAPI_HostAddress = http://localhost:5084
+
+GET {{OA.PortfolioWebSite.AuthAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
