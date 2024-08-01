@@ -1,0 +1,6 @@
+@OA.PortfolioWebSite.DataAPI_HostAddress = http://localhost:5171
+
+GET {{OA.PortfolioWebSite.DataAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
