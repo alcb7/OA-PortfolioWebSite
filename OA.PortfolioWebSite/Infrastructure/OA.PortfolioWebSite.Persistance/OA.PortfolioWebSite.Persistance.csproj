@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\OA.PortfolioWebSite.Application\OA.PortfolioWebSite.Application.csproj" />
     <ProjectReference Include="..\..\Core\OA.PortfolioWebSite.Domain\OA.PortfolioWebSite.Domain.csproj" />
   </ItemGroup>
 

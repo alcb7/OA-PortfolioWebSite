@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using OA.PortfolioWebSite.Persistance.Contexts;
+using OA.PortfolioWebSite.Application.Repositories;
+using OA.PortfolioWebSite.Persistance.Services;
 
 namespace OA.PortfolioWebSite.Persistance
 {
@@ -15,6 +17,9 @@ namespace OA.PortfolioWebSite.Persistance
 
             services.AddDbContext<DataAPIDbContext>(options =>
                 options.UseSqlServer(dataConnectionString));
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IJwtTokenService, JwtTokenService>();
+
 
             var serviceProvider = services.BuildServiceProvider();
             using (var scope = serviceProvider.CreateScope())
