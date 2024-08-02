@@ -1,26 +1,34 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 using OA.PortfolioWebSite.Persistance.Contexts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OA.PortfolioWebSite.Persistance
 {
-    //public void ServiceRegistration(IServiceCollection services)
-    //{
-    //    //services.AddDbContext<DataAPIDbContext>(options =>
-    //    //    options.UseSqlServer(Configuration.GetConnectionString("AuthConnection")));
+    public static class ServiceRegistration
+    {
+        public static void AddPersistenceServices(IServiceCollection services)
+        {
+            const string authConnectionString = "Server=.;Database=AuthDb;User Id=publish_user;Password=123456;TrustServerCertificate=True;";
+            const string dataConnectionString = "Server=.;Database=DataDb;User Id=publish_user;Password=123456;TrustServerCertificate=True;";
+            services.AddDbContext<AuthAPIDbContext>(options =>
+                options.UseSqlServer(authConnectionString));
 
-    //    services.AddDbContext<DataAPIDbContext>(options =>
-    //        options.UseSqlServer(Configuration.GetConnectionString("DataConnection")));
+            services.AddDbContext<DataAPIDbContext>(options =>
+                options.UseSqlServer(dataConnectionString));
 
-    //    services.AddScoped<UserRepository>();
-    //    services.AddScoped<ExperienceRepository>();
+            var serviceProvider = services.BuildServiceProvider();
+            using (var scope = serviceProvider.CreateScope())
+            {
+                var authDbContext = scope.ServiceProvider.GetRequiredService<AuthAPIDbContext>();
+                var dataDbContext = scope.ServiceProvider.GetRequiredService<DataAPIDbContext>();
 
-    //    // Diğer servis bağımlılıkları
-    //}
-    
-    
+                // Veritabanını sil ve yeniden oluştur
+                authDbContext.Database.EnsureDeleted();
+                authDbContext.Database.EnsureCreated();
+
+                dataDbContext.Database.EnsureDeleted();
+                dataDbContext.Database.EnsureCreated();
+            }
+        }
+    }
 }
