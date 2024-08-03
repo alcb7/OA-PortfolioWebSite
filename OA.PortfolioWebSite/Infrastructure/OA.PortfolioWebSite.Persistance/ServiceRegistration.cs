@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
 using OA.PortfolioWebSite.Persistance.Contexts;
 using OA.PortfolioWebSite.Application.Repositories;
 using OA.PortfolioWebSite.Persistance.Services;
@@ -10,16 +12,24 @@ namespace OA.PortfolioWebSite.Persistance
     {
         public static void AddPersistenceServices(IServiceCollection services)
         {
-            const string authConnectionString = "Server=.;Database=AuthDb;User Id=publish_user;Password=123456;TrustServerCertificate=True;";
-            const string dataConnectionString = "Server=.;Database=DataDb;User Id=publish_user;Password=123456;TrustServerCertificate=True;";
+            ConfigurationManager configurationAuth = new();
+            configurationAuth.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../OA.PortfolioWebSite.AuthAPI"));
+            configurationAuth.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
+            ConfigurationManager configurationData = new();
+            configurationData.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../OA.PortfolioWebSite.DataAPI"));
+            configurationData.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
+            string authConnectionString = configurationAuth.GetConnectionString("AuthConnection");
+            string dataConnectionString = configurationData.GetConnectionString("DataConnection");
+
             services.AddDbContext<AuthAPIDbContext>(options =>
                 options.UseSqlServer(authConnectionString));
-
             services.AddDbContext<DataAPIDbContext>(options =>
                 options.UseSqlServer(dataConnectionString));
+
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IJwtTokenService, JwtTokenService>();
-
 
             var serviceProvider = services.BuildServiceProvider();
             using (var scope = serviceProvider.CreateScope())
