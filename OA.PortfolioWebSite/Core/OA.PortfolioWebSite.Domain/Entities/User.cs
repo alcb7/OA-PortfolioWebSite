@@ -13,6 +13,7 @@ namespace OA.PortfolioWebSite.Domain.Entities
         public string SurName { get; set; }
         public string Username { get; set; }
         public string PasswordHash { get; set; }
+        public string PasswordSalt { get; set; }
         public string Role { get; set; }
 
     }
