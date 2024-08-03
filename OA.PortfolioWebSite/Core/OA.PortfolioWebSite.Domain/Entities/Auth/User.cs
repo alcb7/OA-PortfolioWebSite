@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OA.PortfolioWebSite.Domain.Entities.Common;
 
-namespace OA.PortfolioWebSite.Domain.Entities
+namespace OA.PortfolioWebSite.Domain.Entities.Auth
 {
     public class User : BaseEntity
     {

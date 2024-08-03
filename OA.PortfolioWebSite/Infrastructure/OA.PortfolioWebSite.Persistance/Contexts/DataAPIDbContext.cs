@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OA.PortfolioWebSite.Domain.Entities;
+using OA.PortfolioWebSite.Domain.Entities.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,10 @@ namespace OA.PortfolioWebSite.Persistance.Contexts
         public DataAPIDbContext(DbContextOptions options) : base(options)
         {
         }
-        DbSet<Experience> Experiences { get; set; }
-        DbSet<About> Abouts { get; set; }
+        DbSet<Experiences> Experiences { get; set; }
+        DbSet<AboutMe> Abouts { get; set; }
         DbSet <Blog> Blogs { get; set; }
-        DbSet <Project> Projects { get; set; }
+        DbSet <Projects> Projects { get; set; }
         DbSet <Service> Services { get; set; }
 
 

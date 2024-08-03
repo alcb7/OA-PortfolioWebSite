@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OA.PortfolioWebSite.Domain.Entities;
+using OA.PortfolioWebSite.Domain.Entities.Auth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
