@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OA.PortfolioWebSite.Application.DTOs;
 using OA.PortfolioWebSite.Application.Repositories;
@@ -47,7 +48,6 @@ namespace OA.PortfolioWebSite.AuthAPI.Controllers
             var createdUser = await _userService.Register(newUser, registerDto.Password);
             return Ok(createdUser);
         }
-
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUserById(int id)
         {
