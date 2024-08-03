@@ -9,5 +9,8 @@ namespace OA.PortfolioWebSite.Domain.Entities.Data
 {
     public class Projects : BaseEntity
     {
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

@@ -7,7 +7,10 @@ using OA.PortfolioWebSite.Domain.Entities.Common;
 
 namespace OA.PortfolioWebSite.Domain.Entities.Data
 {
-    public class About : BaseEntity
+    public class AboutMe : BaseEntity
     {
+        public string Introduction { get; set; }
+        public string ImageUrl1 { get; set; }
+        public string ImageUrl2 { get; set; }
     }
 }

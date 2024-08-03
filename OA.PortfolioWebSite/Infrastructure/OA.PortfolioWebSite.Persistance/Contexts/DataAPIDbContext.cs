@@ -14,11 +14,15 @@ namespace OA.PortfolioWebSite.Persistance.Contexts
         public DataAPIDbContext(DbContextOptions options) : base(options)
         {
         }
-        DbSet<Experiences> Experiences { get; set; }
-        DbSet<AboutMe> Abouts { get; set; }
-        DbSet <Blog> Blogs { get; set; }
-        DbSet <Projects> Projects { get; set; }
-        DbSet <Service> Services { get; set; }
+       public DbSet<Experiences> Experiences { get; set; }
+       public DbSet<AboutMe> Abouts { get; set; }
+       public DbSet <Blog> Blogs { get; set; }
+       public DbSet <Projects> Projects { get; set; }
+       public DbSet <Service> Services { get; set; }
+        public DbSet<AboutMe> AboutMe { get; set; }
+        public DbSet<PersonalInfo> PersonalInfo { get; set; }
+        public DbSet<Educations> Educations { get; set; }
+        public DbSet<ContactMessages> ContactMessages { get; set; }
 
 
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OA.PortfolioWebSite.Domain.Entities.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,11 @@ using System.Threading.Tasks;
 
 namespace OA.PortfolioWebSite.Domain.Entities.Data
 {
-    internal class PersonalInfo
-    {
+    public class PersonalInfo : BaseEntity
+    { 
+        public string About { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public DateTime BirthDate { get; set; }
     }
 }
