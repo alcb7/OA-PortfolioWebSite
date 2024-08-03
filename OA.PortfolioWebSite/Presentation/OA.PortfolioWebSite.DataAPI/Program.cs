@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Configuration;
 using OA.PortfolioWebSite.Persistance;
 
 var builder = WebApplication.CreateBuilder(args);

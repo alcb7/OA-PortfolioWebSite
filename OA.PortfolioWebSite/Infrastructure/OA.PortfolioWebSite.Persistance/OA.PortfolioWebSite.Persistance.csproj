@@ -9,9 +9,11 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.7" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\OA.PortfolioWebSite.Application\OA.PortfolioWebSite.Application.csproj" />
     <ProjectReference Include="..\..\Core\OA.PortfolioWebSite.Domain\OA.PortfolioWebSite.Domain.csproj" />
   </ItemGroup>
 

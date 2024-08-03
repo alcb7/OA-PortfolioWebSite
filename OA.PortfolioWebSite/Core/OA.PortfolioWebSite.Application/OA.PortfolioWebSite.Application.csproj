@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\OA.PortfolioWebSite.Domain\OA.PortfolioWebSite.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
