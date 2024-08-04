@@ -1,4 +1,5 @@
-﻿using OA.PortfolioWebSite.Application.Repositories;
+﻿using OA.PortfolioWebSite.Application.Interfaces.Repositories;
+using OA.PortfolioWebSite.Application.Interfaces.Services;
 using OA.PortfolioWebSite.Domain.Entities.Data;
 using System;
 using System.Collections.Generic;

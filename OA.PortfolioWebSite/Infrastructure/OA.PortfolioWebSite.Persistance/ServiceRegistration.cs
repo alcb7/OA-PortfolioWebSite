@@ -3,8 +3,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
 using OA.PortfolioWebSite.Persistance.Contexts;
-using OA.PortfolioWebSite.Application.Repositories;
 using OA.PortfolioWebSite.Persistance.Services;
+using OA.PortfolioWebSite.Application.Interfaces.Repositories;
+using OA.PortfolioWebSite.Application.Interfaces.Services;
+using OA.PortfolioWebSite.Persistance.Repositories;
 
 namespace OA.PortfolioWebSite.Persistance
 {
@@ -30,6 +32,10 @@ namespace OA.PortfolioWebSite.Persistance
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IJwtTokenService, JwtTokenService>();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+            services.AddScoped<IAboutMeRepository, AboutMeRepository>();
+            services.AddScoped<IAboutMeService, AboutMeService>();
 
             var serviceProvider = services.BuildServiceProvider();
             using (var scope = serviceProvider.CreateScope())

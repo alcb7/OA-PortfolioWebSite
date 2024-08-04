@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OA.PortfolioWebSite.Application.Repositories;
+using OA.PortfolioWebSite.Application.Interfaces.Repositories;
 using OA.PortfolioWebSite.Persistance.Contexts;
 using System;
 using System.Collections.Generic;
@@ -14,10 +14,10 @@ namespace OA.PortfolioWebSite.Persistance.Services
         private readonly DataAPIDbContext _context;
         private readonly DbSet<T> _dbSet;
 
-        public Repository(DataAPIDbContext context, DbSet<T> dbSet)
+        public Repository(DataAPIDbContext context)
         {
             _context = context;
-            _dbSet = dbSet;
+            _dbSet = _context.Set<T>();
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()

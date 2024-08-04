@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using OA.PortfolioWebSite.Application.Repositories;
+using OA.PortfolioWebSite.Application.Interfaces.Repositories;
 using OA.PortfolioWebSite.Domain.Entities.Auth;
 using System;
 using System.Collections.Generic;

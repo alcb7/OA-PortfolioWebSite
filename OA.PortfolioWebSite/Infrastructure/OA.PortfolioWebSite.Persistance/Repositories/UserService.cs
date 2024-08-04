@@ -1,5 +1,4 @@
-﻿using OA.PortfolioWebSite.Application.Repositories;
-using OA.PortfolioWebSite.Persistance.Contexts;
+﻿using OA.PortfolioWebSite.Persistance.Contexts;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
@@ -8,6 +7,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using OA.PortfolioWebSite.Domain.Entities.Auth;
+using OA.PortfolioWebSite.Application.Interfaces.Repositories;
 
 namespace OA.PortfolioWebSite.Persistance.Services
 {

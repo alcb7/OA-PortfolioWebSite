@@ -2,8 +2,9 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OA.PortfolioWebSite.Application.DTOs;
-using OA.PortfolioWebSite.Application.Repositories;
+using OA.PortfolioWebSite.Application.Interfaces.Repositories;
 using OA.PortfolioWebSite.Domain.Entities;
+using OA.PortfolioWebSite.Domain.Entities.Auth;
 
 namespace OA.PortfolioWebSite.AuthAPI.Controllers
 {
