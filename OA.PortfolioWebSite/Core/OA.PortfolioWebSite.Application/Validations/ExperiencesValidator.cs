@@ -12,11 +12,12 @@ namespace OA.PortfolioWebSite.Application.Validations
     {
         public ExperiencesValidator()
         {
-            //RuleFor(x => x.Title).NotEmpty().MaximumLength(100);
-            //RuleFor(x => x.Company).NotEmpty().MaximumLength(100);
-            //RuleFor(x => x.StartDate).NotEmpty();
-            //RuleFor(x => x.EndDate).NotEmpty();
-            //RuleFor(x => x.Description).NotEmpty();
+            RuleFor(x => x.Title).NotEmpty().WithMessage("Title is required.");
+            RuleFor(x => x.Company).NotEmpty().WithMessage("Company is required.");
+            RuleFor(x => x.StartDate).NotEmpty().WithMessage("Start date is required.");
+            RuleFor(x => x.EndDate).NotEmpty().WithMessage("End date is required.");
+            RuleFor(x => x.Description).NotEmpty().WithMessage("Description is required.");
+
         }
     }
 }

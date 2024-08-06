@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using OA.PortfolioWebSite.Application.DTOs;
+using OA.PortfolioWebSite.Domain.Entities;
 using OA.PortfolioWebSite.Domain.Entities.Data;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,9 @@ namespace OA.PortfolioWebSite.Application
         {
             CreateMap<AboutMe, AboutMeCreateDto>().ReverseMap();
             CreateMap<AboutMe, AboutMeUpdateDto>().ReverseMap();
+            CreateMap<Experiences, ExperienceDto>().ReverseMap(); ;
+            CreateMap<ExperiencesCreateDto, Experiences>().ReverseMap(); ;
+            CreateMap<ExperiencesUpdateDto, Experiences>().ReverseMap(); ;
         }
     }
 }
