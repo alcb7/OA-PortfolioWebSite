@@ -1,6 +1,9 @@
-﻿using OA.PortfolioWebSite.Application.Interfaces.Repositories;
+﻿using AutoMapper;
+using OA.PortfolioWebSite.Application.DTOs;
+using OA.PortfolioWebSite.Application.Interfaces.Repositories;
 using OA.PortfolioWebSite.Application.Interfaces.Services;
 using OA.PortfolioWebSite.Domain.Entities.Data;
+using OA.PortfolioWebSite.Persistance.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +15,12 @@ namespace OA.PortfolioWebSite.Persistance.Services
     public class AboutMeService : IAboutMeService
     {
         private readonly IRepository<AboutMe> _repository;
+        private readonly IMapper _mapper;
 
-        public AboutMeService(IRepository<AboutMe> repository)
+        public AboutMeService(IRepository<AboutMe> repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         public async Task<IEnumerable<AboutMe>> GetAllAboutMeAsync()
@@ -28,13 +33,21 @@ namespace OA.PortfolioWebSite.Persistance.Services
             return await _repository.GetByIdAsync(id);
         }
 
-        public async Task AddAboutMeAsync(AboutMe aboutMe)
+        public async Task AddAboutMeAsync(AboutMeCreateDto aboutMeCreateDto)
         {
+            var aboutMe = _mapper.Map<AboutMe>(aboutMeCreateDto);
             await _repository.AddAsync(aboutMe);
         }
 
-        public async Task UpdateAboutMeAsync(AboutMe aboutMe)
+        public async Task UpdateAboutMeAsync(AboutMeUpdateDto aboutMeUpdateDto)
         {
+            var aboutMe = await _repository.GetByIdAsync(aboutMeUpdateDto.Id);
+            if (aboutMe == null)
+            {
+                throw new ArgumentException("AboutMe not found");
+            }
+
+            _mapper.Map(aboutMeUpdateDto, aboutMe);
             await _repository.UpdateAsync(aboutMe);
         }
 

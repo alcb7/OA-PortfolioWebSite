@@ -1,4 +1,5 @@
-﻿using OA.PortfolioWebSite.Domain.Entities.Data;
+﻿using OA.PortfolioWebSite.Application.DTOs;
+using OA.PortfolioWebSite.Domain.Entities.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,8 @@ namespace OA.PortfolioWebSite.Application.Interfaces.Services
     {
         Task<AboutMe> GetAboutMeByIdAsync(int id);
         Task<IEnumerable<AboutMe>> GetAllAboutMeAsync();
-        Task AddAboutMeAsync(AboutMe aboutMe);
-        Task UpdateAboutMeAsync(AboutMe aboutMe);
+        Task AddAboutMeAsync(AboutMeCreateDto aboutMeCreateDto);
+        Task UpdateAboutMeAsync(AboutMeUpdateDto aboutMeUpdateDto);
         Task DeleteAboutMeAsync(int id);
     }
 }

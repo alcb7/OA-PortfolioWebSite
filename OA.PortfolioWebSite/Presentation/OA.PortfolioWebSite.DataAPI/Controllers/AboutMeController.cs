@@ -35,27 +35,29 @@ namespace OA.PortfolioWebSite.DataAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddAboutMe([FromBody] AboutMeDto aboutMeDto)
+        public async Task<IActionResult> AddAboutMe([FromBody] AboutMeCreateDto aboutMeCreateDto)
         {
-            var aboutMe = new AboutMe
-            {
-                Introduction = aboutMeDto.Introduction,
-                ImageUrl1 = aboutMeDto.ImageUrl1,
-                ImageUrl2 = aboutMeDto.ImageUrl2
-            };
-
-            await _aboutMeService.AddAboutMeAsync(aboutMe);
-            return Ok(aboutMe);
+            await _aboutMeService.AddAboutMeAsync(aboutMeCreateDto);
+            return CreatedAtAction(nameof(GetAboutMeById), new { id = aboutMeCreateDto.Introduction }, aboutMeCreateDto);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAboutMe(int id, [FromBody] AboutMe aboutMe)
+        public async Task<IActionResult> UpdateAboutMe(int id, [FromBody] AboutMeUpdateDto aboutMeUpdateDto)
         {
-            if (id != aboutMe.Id)
-                return BadRequest();
+            if (id != aboutMeUpdateDto.Id)
+            {
+                return BadRequest("ID in the URL does not match ID in the body");
+            }
 
-            await _aboutMeService.UpdateAboutMeAsync(aboutMe);
-            return NoContent();
+            try
+            {
+                await _aboutMeService.UpdateAboutMeAsync(aboutMeUpdateDto);
+                return NoContent();
+            }
+            catch (ArgumentException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         [HttpDelete("{id}")]

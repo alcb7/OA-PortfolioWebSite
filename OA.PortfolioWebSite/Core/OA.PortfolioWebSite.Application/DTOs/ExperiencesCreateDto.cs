@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace OA.PortfolioWebSite.Application.DTOs
 {
-    public class AboutMeDto
+    public class ExperiencesCreateDto
     {
-        public string Introduction { get; set; }
-        public string ImageUrl1 { get; set; }
-        public string ImageUrl2 { get; set; }
     }
-
 }

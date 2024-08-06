@@ -7,6 +7,10 @@ using OA.PortfolioWebSite.Persistance.Services;
 using OA.PortfolioWebSite.Application.Interfaces.Repositories;
 using OA.PortfolioWebSite.Application.Interfaces.Services;
 using OA.PortfolioWebSite.Persistance.Repositories;
+using OA.PortfolioWebSite.Application;
+using OA.PortfolioWebSite.Application.Validations;
+using FluentValidation.AspNetCore;
+using FluentValidation;
 
 namespace OA.PortfolioWebSite.Persistance
 {
@@ -36,6 +40,14 @@ namespace OA.PortfolioWebSite.Persistance
 
             services.AddScoped<IAboutMeRepository, AboutMeRepository>();
             services.AddScoped<IAboutMeService, AboutMeService>();
+            services.AddAutoMapper(typeof(MappingProfile));
+
+
+
+            services.AddValidatorsFromAssemblyContaining<AboutMeValidator>();
+            services.AddMvc().AddFluentValidation();
+
+
 
             var serviceProvider = services.BuildServiceProvider();
             using (var scope = serviceProvider.CreateScope())

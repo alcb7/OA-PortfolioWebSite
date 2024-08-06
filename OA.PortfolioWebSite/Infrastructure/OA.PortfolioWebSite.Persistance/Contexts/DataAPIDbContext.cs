@@ -16,7 +16,7 @@ namespace OA.PortfolioWebSite.Persistance.Contexts
         }
        public DbSet<Experiences> Experiences { get; set; }
        public DbSet<AboutMe> Abouts { get; set; }
-       public DbSet <Blog> Blogs { get; set; }
+       public DbSet <BlogPosts> Blogs { get; set; }
        public DbSet <Projects> Projects { get; set; }
        public DbSet <Service> Services { get; set; }
         public DbSet<AboutMe> AboutMe { get; set; }

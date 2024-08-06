@@ -8,14 +8,12 @@ using OA.PortfolioWebSite.Domain.Entities.Common;
 
 namespace OA.PortfolioWebSite.Domain.Entities
 {
-    public class Experiences : BaseEntity
+    public class BlogPosts : BaseEntity
     {
         public string Title { get; set; }
-        public string Company { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
-        public string Description { get; set; }
-        public int UserId { get; set; }
-        public User User { get; set; }
+        public string Content { get; set; }
+        public DateTime PublishDate { get; set; }
+        public int AuthorId { get; set; }
+        public User Author { get; set; }
     }
 }
