@@ -34,15 +34,21 @@ namespace OA.PortfolioWebSite.DataAPI.Controllers
             return Ok(aboutMes);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddAboutMe([FromBody] AboutMeCreateDto aboutMeCreateDto)
-        {
-            // Yeni AboutMe entity'sini oluştur
-            var aboutMe = await _aboutMeService.AddAboutMeAsync(aboutMeCreateDto);
+        //[HttpPost]
+        //public async Task<IActionResult> AddAboutMe([FromBody] AboutMeCreateDto aboutMeCreateDto)
+        //{
+        //    await _aboutMeService.AddAboutMeAsync(aboutMeCreateDto);
+        //    return CreatedAtAction(nameof(GetAboutMeById), new { id = aboutMeCreateDto.Introduction }, aboutMeCreateDto);
+        //}
+        //[HttpPost]
+        //public async Task<IActionResult> AddAboutMe([FromBody] AboutMeCreateDto aboutMeCreateDto)
+        //{
+        //    // Yeni AboutMe entity'sini oluştur
+        //    var aboutMe = await _aboutMeService.AddAboutMeAsync(aboutMeCreateDto);
 
-            // Oluşturulan entity'nin ID'sini geri döndür
-            return CreatedAtAction(nameof(GetAboutMeById), new { id = aboutMe.Id }, aboutMe);
-        }
+        //    // Oluşturulan entity'nin ID'sini geri döndür
+        //    return CreatedAtAction(nameof(GetAboutMeById), new { id = aboutMe.Id }, aboutMe);
+        //}
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAboutMe(int id, [FromBody] AboutMeUpdateDto aboutMeUpdateDto)
