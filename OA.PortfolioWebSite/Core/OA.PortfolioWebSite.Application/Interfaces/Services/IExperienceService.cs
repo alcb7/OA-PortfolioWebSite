@@ -10,10 +10,10 @@ namespace OA.PortfolioWebSite.Application.Interfaces.Services
 {
     public interface IExperienceService 
     {
-        Task<IEnumerable<ExperienceDto>> GetAllExperiencesAsync();
-        Task<ExperienceDto> GetExperienceByIdAsync(int id);
-        Task<ExperienceDto> AddExperienceAsync(ExperiencesCreateDto experienceCreateDto);
-        Task<ExperienceDto> UpdateExperienceAsync(int id, ExperiencesUpdateDto experienceUpdateDto);
+        Task<IEnumerable<Experiences>> GetAllExperiencesAsync();
+        Task<Experiences> GetExperienceByIdAsync(int id);
+        Task AddExperienceAsync(ExperiencesCreateDto experienceCreateDto);
+        Task UpdateExperienceAsync(ExperiencesUpdateDto experienceUpdateDto);
         Task DeleteExperienceAsync(int id);
     }
 }

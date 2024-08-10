@@ -10,12 +10,12 @@ namespace OA.PortfolioWebSite.Domain.Entities.Data
 {
     public class Comments : BaseEntity
     {
-        public string Content { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public bool IsApproved { get; set; }
-        public int BlogPostId { get; set; }
-        public BlogPosts BlogPost { get; set; }
-        public int UserId { get; set; }
-        public User User { get; set; }
+        //public string Content { get; set; }
+        //public DateTime CreatedDate { get; set; }
+        //public bool IsApproved { get; set; }
+        //public int BlogPostId { get; set; }
+        //public BlogPosts BlogPost { get; set; }
+        //public int UserId { get; set; }
+        //public User User { get; set; }
     }
 }

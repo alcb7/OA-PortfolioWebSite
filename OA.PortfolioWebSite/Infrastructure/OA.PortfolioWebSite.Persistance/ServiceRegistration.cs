@@ -57,7 +57,7 @@ namespace OA.PortfolioWebSite.Persistance
 
                 // Veritabanını sil ve yeniden oluştur
                 authDbContext.Database.EnsureDeleted();
-                authDbContext.Database.EnsureCreated();
+               // authDbContext.Database.EnsureCreated();
 
                 dataDbContext.Database.EnsureDeleted();
                 dataDbContext.Database.EnsureCreated();

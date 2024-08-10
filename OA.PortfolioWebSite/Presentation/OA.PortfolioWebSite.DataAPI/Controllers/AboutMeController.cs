@@ -37,8 +37,11 @@ namespace OA.PortfolioWebSite.DataAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddAboutMe([FromBody] AboutMeCreateDto aboutMeCreateDto)
         {
-            await _aboutMeService.AddAboutMeAsync(aboutMeCreateDto);
-            return CreatedAtAction(nameof(GetAboutMeById), new { id = aboutMeCreateDto.Introduction }, aboutMeCreateDto);
+            // Yeni AboutMe entity'sini oluştur
+            var aboutMe = await _aboutMeService.AddAboutMeAsync(aboutMeCreateDto);
+
+            // Oluşturulan entity'nin ID'sini geri döndür
+            return CreatedAtAction(nameof(GetAboutMeById), new { id = aboutMe.Id }, aboutMe);
         }
 
         [HttpPut("{id}")]

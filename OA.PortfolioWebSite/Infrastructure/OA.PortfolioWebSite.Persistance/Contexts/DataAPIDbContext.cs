@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OA.PortfolioWebSite.Domain.Entities;
 using OA.PortfolioWebSite.Domain.Entities.Data;
+using OA.PortfolioWebSite.Persistance.Configurations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,15 @@ namespace OA.PortfolioWebSite.Persistance.Contexts
         public DataAPIDbContext(DbContextOptions options) : base(options)
         {
         }
-       public DbSet<Experiences> Experiences { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new AboutMeConfiguration());
+            modelBuilder.ApplyConfiguration(new ExperienceConfiguration());
+
+            base.OnModelCreating(modelBuilder);
+        }
+        public DbSet<Experiences> Experiences { get; set; }
        public DbSet<AboutMe> Abouts { get; set; }
        public DbSet <BlogPosts> Blogs { get; set; }
        public DbSet <Projects> Projects { get; set; }
