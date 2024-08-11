@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Ardalis.Result;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OA.PortfolioWebSite.Application.DTOs;
 using OA.PortfolioWebSite.Application.Interfaces.Services;
@@ -10,60 +11,89 @@ namespace OA.PortfolioWebSite.DataAPI.Controllers
     [ApiController]
     public class ExperienceController : ControllerBase
     {
-        private readonly IExperienceService _service;
+        private readonly IExperienceService _experienceService;
 
         public ExperienceController(IExperienceService experienceService)
         {
-            _service = experienceService;
+            _experienceService = experienceService;
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetExperienceById(int id)
         {
-            var aboutMe = await _service.GetExperienceByIdAsync(id);
-            if (aboutMe == null)
-                return NotFound();
+            var result = await _experienceService.GetExperienceByIdAsync(id);
 
-            return Ok(aboutMe);
+            if (!result.IsSuccess)
+            {
+                if (result.Status == ResultStatus.NotFound)
+                    return NotFound(result.ValidationErrors);
+
+                return BadRequest(result.ValidationErrors);
+            }
+
+            return Ok(result.Value);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllExperiences()
         {
-            var aboutMes = await _service.GetAllExperiencesAsync();
-            return Ok(aboutMes);
+            var result = await _experienceService.GetAllExperiencesAsync();
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.ValidationErrors);
+            }
+
+            return Ok(result.Value);
         }
 
         [HttpPost]
         public async Task<IActionResult> AddExperience([FromBody] ExperiencesCreateDto experienceCreateDto)
         {
-            await _service.AddExperienceAsync(experienceCreateDto);
-            return CreatedAtAction(nameof(GetExperienceById), new { id = experienceCreateDto.Introduction }, aboutMeCreateDto);
+            var result = await _experienceService.AddExperienceAsync(experienceCreateDto);
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.ValidationErrors);
+            }
+
+            return CreatedAtAction(nameof(GetExperienceById), new { id = result.Value.Id }, result.Value);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateExperience(int id, [FromBody] AboutMeUpdateDto aboutMeUpdateDto)
+        public async Task<IActionResult> UpdateExperience(int id, [FromBody] ExperiencesUpdateDto experienceUpdateDto)
         {
-            if (id != aboutMeUpdateDto.Id)
+            if (id != experienceUpdateDto.Id)
             {
                 return BadRequest("ID in the URL does not match ID in the body");
             }
 
-            try
+            var result = await _experienceService.UpdateExperienceAsync(experienceUpdateDto);
+
+            if (!result.IsSuccess)
             {
-                await _service.UpdateExperienceAsync(aboutMeUpdateDto);
-                return NoContent();
+                if (result.Status == ResultStatus.NotFound)
+                    return NotFound(result.ValidationErrors);
+
+                return BadRequest(result.ValidationErrors);
             }
-            catch (ArgumentException ex)
-            {
-                return NotFound(ex.Message);
-            }
+
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteExperience(int id)
         {
-            await _service.DeleteExperienceAsync(id);
+            var result = await _experienceService.DeleteExperienceAsync(id);
+
+            if (!result.IsSuccess)
+            {
+                if (result.Status == ResultStatus.NotFound)
+                    return NotFound(result.ValidationErrors);
+
+                return BadRequest(result.ValidationErrors);
+            }
+
             return NoContent();
         }
     }

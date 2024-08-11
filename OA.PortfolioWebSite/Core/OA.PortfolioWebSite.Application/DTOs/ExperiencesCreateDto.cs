@@ -13,5 +13,6 @@ namespace OA.PortfolioWebSite.Application.DTOs
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public string Description { get; set; }
+        public int UserId { get; set; }
     }
 }

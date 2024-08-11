@@ -1,4 +1,5 @@
-﻿using OA.PortfolioWebSite.Application.DTOs;
+﻿using Ardalis.Result;
+using OA.PortfolioWebSite.Application.DTOs;
 using OA.PortfolioWebSite.Domain.Entities.Data;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,10 @@ namespace OA.PortfolioWebSite.Application.Interfaces.Services
 {
     public interface IAboutMeService
     {
-        Task<AboutMe> GetAboutMeByIdAsync(int id);
-        Task<IEnumerable<AboutMe>> GetAllAboutMeAsync();
-        Task AddAboutMeAsync(AboutMeCreateDto aboutMeCreateDto);
-        Task UpdateAboutMeAsync(AboutMeUpdateDto aboutMeUpdateDto);
-        Task DeleteAboutMeAsync(int id);
+        Task<Result<AboutMe>> GetAboutMeByIdAsync(int id);
+        Task<Result<IEnumerable<AboutMe>>> GetAllAboutMeAsync();
+        Task<Result<AboutMe>> AddAboutMeAsync(AboutMeCreateDto aboutMeCreateDto);
+        Task<Result<AboutMe>> UpdateAboutMeAsync(AboutMeUpdateDto aboutMeUpdateDto);
+        Task<Result> DeleteAboutMeAsync(int id);
     }
 }

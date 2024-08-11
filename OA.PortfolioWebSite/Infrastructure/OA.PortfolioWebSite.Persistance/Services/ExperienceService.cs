@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Ardalis.Result;
+using AutoMapper;
 using OA.PortfolioWebSite.Application.DTOs;
 using OA.PortfolioWebSite.Application.Interfaces.Repositories;
 using OA.PortfolioWebSite.Application.Interfaces.Services;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace OA.PortfolioWebSite.Persistance.Services
 {
@@ -17,47 +19,65 @@ namespace OA.PortfolioWebSite.Persistance.Services
         private readonly IExperienceRepository _repository;
         private readonly IMapper _mapper;
 
-        public ExperienceService(IExperienceRepository experienceRepository, IMapper mapper)
+        public ExperienceService(IExperienceRepository repository, IMapper mapper)
         {
-            _repository = experienceRepository;
+            _repository = repository;
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<Experiences>> GetAllExperiencesAsync()
+        public async Task<Result<IEnumerable<Experiences>>> GetAllExperiencesAsync()
         {
-            return await _repository.GetAllAsync();
-        }
-
-        public async Task<Experiences> GetExperienceByIdAsync(int id)
-        {
-            return await _repository.GetByIdAsync(id);
-        }
-
-        public async Task AddExperienceAsync(ExperiencesCreateDto experienceCreateDto)
-        {
-            var aboutMe = _mapper.Map<Experiences>(experienceCreateDto);
-            await _repository.AddAsync(aboutMe);
-        }
-
-        public async Task UpdateExperienceAsync(ExperiencesUpdateDto ExperinceUpdateDto)
-        {
-            var experinece = await _repository.GetByIdAsync(ExperinceUpdateDto.Id);
-            if (experinece == null)
+            var experienceEntities = await _repository.GetAllAsync();
+            if (!experienceEntities.IsSuccess)
             {
-                throw new ArgumentException("Experience not found");
+                return Result<IEnumerable<Experiences>>.Invalid(experienceEntities.ValidationErrors);
+            }
+            return experienceEntities;
+        }
+
+        public async Task<Result<Experiences>> GetExperienceByIdAsync(int id)
+        {
+            var experienceEntity = await _repository.GetByIdAsync(id);
+            if (!experienceEntity.IsSuccess)
+            {
+                return Result<Experiences>.Invalid(experienceEntity.ValidationErrors);
+            }
+            return experienceEntity;
+        }
+
+        public async Task<Result<Experiences>> AddExperienceAsync(ExperiencesCreateDto experienceCreateDto)
+        {
+            var experienceEntity = _mapper.Map<Experiences>(experienceCreateDto);
+            var result = await _repository.AddAsync(experienceEntity);
+
+            if (!result.IsSuccess)
+            {
+                return Result<Experiences>.Invalid(result.ValidationErrors);
+            }
+            return result;
+        }
+
+        public async Task<Result<Experiences>> UpdateExperienceAsync(ExperiencesUpdateDto experienceUpdateDto)
+        {
+            var experienceResult = await _repository.GetByIdAsync(experienceUpdateDto.Id);
+            if (!experienceResult.IsSuccess)
+            {
+                return Result<Experiences>.Invalid(experienceResult.ValidationErrors);
             }
 
-            _mapper.Map(ExperinceUpdateDto, experinece);
-            await _repository.UpdateAsync(experinece);
+            _mapper.Map(experienceUpdateDto, experienceResult.Value);
+            return await _repository.UpdateAsync(experienceResult.Value);
         }
 
-        public async Task DeleteExperienceAsync(int id)
+        public async Task<Result> DeleteExperienceAsync(int id)
         {
-            var aboutMe = await _repository.GetByIdAsync(id);
-            if (aboutMe != null)
+            var experienceResult = await _repository.GetByIdAsync(id);
+            if (!experienceResult.IsSuccess)
             {
-                await _repository.DeleteAsync(aboutMe);
+                return Result.Invalid(experienceResult.ValidationErrors);
             }
+
+            return await _repository.DeleteAsync(id);
         }
     }
 }

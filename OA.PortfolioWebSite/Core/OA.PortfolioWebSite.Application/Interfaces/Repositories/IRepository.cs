@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ardalis.Result;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +9,10 @@ namespace OA.PortfolioWebSite.Application.Interfaces.Repositories
 {
     public interface IRepository<T> where T : class
     {
-        Task<IEnumerable<T>> GetAllAsync();
-        Task<T> GetByIdAsync(int id);
-        Task AddAsync(T entity);
-        Task UpdateAsync(T entity);
-        Task DeleteAsync(T entity);
+        Task<Result<IEnumerable<T>>> GetAllAsync();
+        Task<Result<T>> GetByIdAsync(int id);
+        Task<Result<T>> AddAsync(T entity);
+        Task<Result<T>> UpdateAsync(T entity);
+        Task<Result> DeleteAsync(int id);
     }
 }

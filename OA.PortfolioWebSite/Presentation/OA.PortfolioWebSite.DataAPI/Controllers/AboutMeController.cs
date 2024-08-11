@@ -20,35 +20,29 @@ namespace OA.PortfolioWebSite.DataAPI.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAboutMeById(int id)
         {
-            var aboutMe = await _aboutMeService.GetAboutMeByIdAsync(id);
-            if (aboutMe == null)
-                return NotFound();
+            var result = await _aboutMeService.GetAboutMeByIdAsync(id);
+            if (!result.IsSuccess)
+                return NotFound(result.Errors);
 
-            return Ok(aboutMe);
+            return Ok(result.Value);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllAboutMe()
         {
-            var aboutMes = await _aboutMeService.GetAllAboutMeAsync();
-            return Ok(aboutMes);
+            var result = await _aboutMeService.GetAllAboutMeAsync();
+            return Ok(result.Value);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> AddAboutMe([FromBody] AboutMeCreateDto aboutMeCreateDto)
-        //{
-        //    await _aboutMeService.AddAboutMeAsync(aboutMeCreateDto);
-        //    return CreatedAtAction(nameof(GetAboutMeById), new { id = aboutMeCreateDto.Introduction }, aboutMeCreateDto);
-        //}
-        //[HttpPost]
-        //public async Task<IActionResult> AddAboutMe([FromBody] AboutMeCreateDto aboutMeCreateDto)
-        //{
-        //    // Yeni AboutMe entity'sini oluştur
-        //    var aboutMe = await _aboutMeService.AddAboutMeAsync(aboutMeCreateDto);
+        [HttpPost]
+        public async Task<IActionResult> AddAboutMe([FromBody] AboutMeCreateDto aboutMeCreateDto)
+        {
+            var result = await _aboutMeService.AddAboutMeAsync(aboutMeCreateDto);
+            if (!result.IsSuccess)
+                return BadRequest(result.Errors);
 
-        //    // Oluşturulan entity'nin ID'sini geri döndür
-        //    return CreatedAtAction(nameof(GetAboutMeById), new { id = aboutMe.Id }, aboutMe);
-        //}
+            return CreatedAtAction(nameof(GetAboutMeById), new { id = result.Value.Id }, result.Value);
+        }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAboutMe(int id, [FromBody] AboutMeUpdateDto aboutMeUpdateDto)
@@ -58,21 +52,20 @@ namespace OA.PortfolioWebSite.DataAPI.Controllers
                 return BadRequest("ID in the URL does not match ID in the body");
             }
 
-            try
-            {
-                await _aboutMeService.UpdateAboutMeAsync(aboutMeUpdateDto);
-                return NoContent();
-            }
-            catch (ArgumentException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            var result = await _aboutMeService.UpdateAboutMeAsync(aboutMeUpdateDto);
+            if (!result.IsSuccess)
+                return NotFound(result.Errors);
+
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAboutMe(int id)
         {
-            await _aboutMeService.DeleteAboutMeAsync(id);
+            var result = await _aboutMeService.DeleteAboutMeAsync(id);
+            if (!result.IsSuccess)
+                return NotFound(result.Errors);
+
             return NoContent();
         }
     }

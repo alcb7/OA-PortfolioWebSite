@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Ardalis.Result;
+using AutoMapper;
 using OA.PortfolioWebSite.Application.DTOs;
 using OA.PortfolioWebSite.Application.Interfaces.Repositories;
 using OA.PortfolioWebSite.Application.Interfaces.Services;
@@ -14,50 +15,47 @@ namespace OA.PortfolioWebSite.Persistance.Services
 {
     public class AboutMeService : IAboutMeService
     {
-        private readonly IRepository<AboutMe> _repository;
+        private readonly IAboutMeRepository _repository;
         private readonly IMapper _mapper;
 
-        public AboutMeService(IRepository<AboutMe> repository, IMapper mapper)
+        public AboutMeService(IAboutMeRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<AboutMe>> GetAllAboutMeAsync()
+        public async Task<Result<IEnumerable<AboutMe>>> GetAllAboutMeAsync()
         {
             return await _repository.GetAllAsync();
         }
 
-        public async Task<AboutMe> GetAboutMeByIdAsync(int id)
+        public async Task<Result<AboutMe>> GetAboutMeByIdAsync(int id)
         {
             return await _repository.GetByIdAsync(id);
         }
 
-        public async Task AddAboutMeAsync(AboutMeCreateDto aboutMeCreateDto)
+        public async Task<Result<AboutMe>> AddAboutMeAsync(AboutMeCreateDto aboutMeCreateDto)
         {
             var aboutMe = _mapper.Map<AboutMe>(aboutMeCreateDto);
-            await _repository.AddAsync(aboutMe);
+            return await _repository.AddAsync(aboutMe);
         }
 
-        public async Task UpdateAboutMeAsync(AboutMeUpdateDto aboutMeUpdateDto)
+        public async Task<Result<AboutMe>> UpdateAboutMeAsync(AboutMeUpdateDto aboutMeUpdateDto)
         {
-            var aboutMe = await _repository.GetByIdAsync(aboutMeUpdateDto.Id);
-            if (aboutMe == null)
+            var aboutMeResult = await _repository.GetByIdAsync(aboutMeUpdateDto.Id);
+            if (!aboutMeResult.IsSuccess)
             {
-                throw new ArgumentException("AboutMe not found");
+                return Result<AboutMe>.NotFound();
             }
 
+            var aboutMe = aboutMeResult.Value;
             _mapper.Map(aboutMeUpdateDto, aboutMe);
-            await _repository.UpdateAsync(aboutMe);
+            return await _repository.UpdateAsync(aboutMe);
         }
 
-        public async Task DeleteAboutMeAsync(int id)
+        public async Task<Result> DeleteAboutMeAsync(int id)
         {
-            var aboutMe = await _repository.GetByIdAsync(id);
-            if (aboutMe != null)
-            {
-                await _repository.DeleteAsync(aboutMe);
-            }
+            return await _repository.DeleteAsync(id);
         }
     }
 }
