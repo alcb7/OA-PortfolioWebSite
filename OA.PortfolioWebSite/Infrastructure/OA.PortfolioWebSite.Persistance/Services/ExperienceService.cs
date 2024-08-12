@@ -79,5 +79,18 @@ namespace OA.PortfolioWebSite.Persistance.Services
 
             return await _repository.DeleteAsync(id);
         }
+        public async Task<Result<IEnumerable<Experiences>>> GetExperienceByUserIdAsync(int userId)
+        {
+            var experiencesResult = await _repository.GetAllAsync();
+
+            if (!experiencesResult.IsSuccess)
+            {
+                var errors = string.Join("; ", experiencesResult.Errors);
+                return Result<IEnumerable<Experiences>>.Error(errors);
+            }
+
+            var userExperiences = experiencesResult.Value.Where(e => e.UserId == userId);
+            return Result<IEnumerable<Experiences>>.Success(userExperiences);
+        }
     }
 }

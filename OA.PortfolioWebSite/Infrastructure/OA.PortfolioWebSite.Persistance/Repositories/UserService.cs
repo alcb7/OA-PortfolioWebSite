@@ -8,6 +8,7 @@ using System;
 using System.Linq;
 using OA.PortfolioWebSite.Domain.Entities.Auth;
 using OA.PortfolioWebSite.Application.Interfaces.Repositories;
+using Ardalis.Result;
 
 namespace OA.PortfolioWebSite.Persistance.Services
 {
@@ -81,6 +82,14 @@ namespace OA.PortfolioWebSite.Persistance.Services
                 Console.WriteLine("Password verification result: " + isMatch);
                 return isMatch;
             }
+        }
+        public async Task<Result<User>> GetUserByIdAsync(int id)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+                return Result<User>.NotFound();
+
+            return Result<User>.Success(user);
         }
     }
 }

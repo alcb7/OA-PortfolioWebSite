@@ -16,5 +16,7 @@ namespace OA.PortfolioWebSite.Application.Interfaces.Services
         Task<Result<Experiences>> AddExperienceAsync(ExperiencesCreateDto experienceCreateDto);
         Task<Result<Experiences>> UpdateExperienceAsync(ExperiencesUpdateDto experienceUpdateDto);
         Task<Result> DeleteExperienceAsync(int id);
+        Task<Result<IEnumerable<Experiences>>> GetExperienceByUserIdAsync(int userId);
+
     }
 }

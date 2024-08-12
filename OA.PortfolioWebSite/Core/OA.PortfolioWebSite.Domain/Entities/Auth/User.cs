@@ -16,11 +16,7 @@ namespace OA.PortfolioWebSite.Domain.Entities.Auth
         public string PasswordHash { get; set; }
         public string PasswordSalt { get; set; }
         public string Role { get; set; }
-       public ICollection<Experiences> Experiences { get; set; }
-       public ICollection<Educations> Educations { get; set; }
-     public ICollection<Projects> Projects { get; set; }
-     public ICollection<BlogPosts> BlogPosts { get; set; }
-     public ICollection<Comments> Comments { get; set; }
+      
 
     }
 }

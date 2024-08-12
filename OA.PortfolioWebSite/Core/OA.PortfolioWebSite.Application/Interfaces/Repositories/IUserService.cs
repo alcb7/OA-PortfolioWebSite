@@ -1,4 +1,5 @@
-﻿using OA.PortfolioWebSite.Domain.Entities.Auth;
+﻿using Ardalis.Result;
+using OA.PortfolioWebSite.Domain.Entities.Auth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace OA.PortfolioWebSite.Application.Interfaces.Repositories
 {
     public interface IUserService
     {
+        Task<Result<User>> GetUserByIdAsync(int id);
+
         Task<User> Authenticate(string username, string password);
         Task<User> Register(User user, string password);
         Task<User> GetUserById(int id);

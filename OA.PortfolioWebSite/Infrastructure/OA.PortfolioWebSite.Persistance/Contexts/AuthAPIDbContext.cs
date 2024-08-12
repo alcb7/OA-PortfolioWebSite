@@ -16,6 +16,6 @@ namespace OA.PortfolioWebSite.Persistance.Contexts
         }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<Admin> Admins { get; set; }
+        public DbSet<Role> Roles { get; set; }
     }
 }
