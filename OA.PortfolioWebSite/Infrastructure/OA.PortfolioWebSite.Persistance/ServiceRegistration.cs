@@ -61,7 +61,7 @@ public static class ServiceRegistration
             dataDbContext.Database.EnsureDeleted();
             dataDbContext.Database.EnsureCreated();
 
-            //SeedData.Initialize(authDbContext, dataDbContext);
+            SeedData.Initialize(authDbContext, dataDbContext);
         }
     }
 }

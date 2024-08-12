@@ -14,9 +14,9 @@ namespace OA.PortfolioWebSite.Domain.Entities
         public string Title { get; set; }
         public string Content { get; set; }
         public DateTime PublishDate { get; set; }
-        public int AuthorId { get; set; }
-        public User Author { get; set; }
-        public ICollection<Comments> Comments { get; set; }
+       public int AuthorId { get; set; }
+       public User Author { get; set; }
+       public ICollection<Comments>? Comments { get; set; }
 
     }
 }
