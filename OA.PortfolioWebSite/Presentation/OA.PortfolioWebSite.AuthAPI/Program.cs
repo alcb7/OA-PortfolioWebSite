@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 // Register your persistence services
-ServiceRegistration.AddPersistenceServices(builder.Services);
+ServiceRegistration2.AddPersistenceServices2(builder.Services);
 
 builder.Services.AddAuthentication(options =>
 {

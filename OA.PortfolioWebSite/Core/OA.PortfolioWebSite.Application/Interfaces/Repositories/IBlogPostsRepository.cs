@@ -5,10 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OA.PortfolioWebSite.Application.Repositories
+namespace OA.PortfolioWebSite.Application.Interfaces.Repositories
 {
-    public interface IJwtTokenService
+    public interface IBlogPostsRepository : IRepository<BlogPosts>
     {
-        string GenerateToken(User user);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OA.PortfolioWebSite.Domain.Entities;
+using OA.PortfolioWebSite.Domain.Entities.Auth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,6 @@ namespace OA.PortfolioWebSite.Persistance.Contexts
         }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<Admin> Admins { get; set; }
+        public DbSet<Role> Roles { get; set; }
     }
 }
