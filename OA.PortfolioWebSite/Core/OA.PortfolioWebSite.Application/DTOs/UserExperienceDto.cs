@@ -11,6 +11,6 @@ namespace OA.PortfolioWebSite.Application.DTOs
     public class UserExperienceDto
     {
         public User User { get; set; }
-        public IEnumerable<Experiences> Experiences { get; set; }
+        public IEnumerable<BlogPosts> Experiences { get; set; }
     }
 }

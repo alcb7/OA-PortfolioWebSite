@@ -57,7 +57,7 @@ public static class SeedData
     {
         if (!dataDbContext.Experiences.Any())
         {
-            var experience = new Experiences
+            var experience = new BlogPosts
             {
                 Title = "Software Engineer",
                 Company = "Tech Corp",
@@ -116,7 +116,7 @@ public static class SeedData
     //            PasswordHash = "fakepasswordhash1",
     //            PasswordSalt = "assasdasdsaszzz",
     //            Role = "admin",
-    //            Experiences = new List<Experiences>(), // Boş liste
+    //            BlogPosts = new List<BlogPosts>(), // Boş liste
     //            Educations = new List<Educations>(), // Boş liste
     //            Projects = new List<Projects>(), // Boş liste
     //            BlogPosts = new List<BlogPosts>(), // Boş liste
@@ -131,7 +131,7 @@ public static class SeedData
     //            PasswordHash = "fakepasswordhash2",
     //            PasswordSalt = "assasdasdsa",
     //            Role = "commenter",
-    //            Experiences = new List<Experiences>(), // Boş liste
+    //            BlogPosts = new List<BlogPosts>(), // Boş liste
     //            Educations = new List<Educations>(), // Boş liste
     //            Projects = new List<Projects>(), // Boş liste
     //            BlogPosts = new List<BlogPosts>(), // Boş liste
@@ -155,9 +155,9 @@ public static class SeedData
 
     //public static void SeedExperiences(DataAPIDbContext dataDbContext)
     //{
-    //    if (!dataDbContext.Experiences.Any())
+    //    if (!dataDbContext.BlogPosts.Any())
     //    {
-    //        var experience = new Experiences
+    //        var experience = new BlogPosts
     //        {
     //            Title = "Software Engineer",
     //            Company = "Tech Corp",
@@ -166,7 +166,7 @@ public static class SeedData
     //            Description = "Developed software applications.",
     //            UserId = 1
     //        };
-    //        dataDbContext.Experiences.Add(experience);
+    //        dataDbContext.BlogPosts.Add(experience);
     //        dataDbContext.SaveChanges();
     //    }
     //}

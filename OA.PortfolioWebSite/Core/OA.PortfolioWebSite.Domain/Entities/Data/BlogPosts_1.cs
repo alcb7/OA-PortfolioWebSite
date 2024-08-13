@@ -8,7 +8,7 @@ using OA.PortfolioWebSite.Domain.Entities.Common;
 
 namespace OA.PortfolioWebSite.Domain.Entities
 {
-    public class Experiences : BaseEntity
+    public class BlogPosts : BaseEntity
     {
         public string Title { get; set; }
         public string Company { get; set; }

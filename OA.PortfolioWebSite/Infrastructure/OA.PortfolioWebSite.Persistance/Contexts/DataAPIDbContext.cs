@@ -23,7 +23,7 @@ namespace OA.PortfolioWebSite.Persistance.Contexts
             //modelBuilder.ApplyConfiguration(new UserConfiguration());
 
         }
-        public DbSet<Experiences> Experiences { get; set; }
+        public DbSet<BlogPosts> Experiences { get; set; }
        public DbSet<AboutMe> Abouts { get; set; }
        public DbSet <BlogPosts> BlogPosts { get; set; }
        public DbSet <Projects> Projects { get; set; }

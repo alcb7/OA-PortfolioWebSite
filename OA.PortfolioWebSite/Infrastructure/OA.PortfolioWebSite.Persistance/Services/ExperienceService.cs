@@ -25,44 +25,44 @@ namespace OA.PortfolioWebSite.Persistance.Services
             _mapper = mapper;
         }
 
-        public async Task<Result<IEnumerable<Experiences>>> GetAllExperiencesAsync()
+        public async Task<Result<IEnumerable<BlogPosts>>> GetAllExperiencesAsync()
         {
             var experienceEntities = await _repository.GetAllAsync();
             if (!experienceEntities.IsSuccess)
             {
-                return Result<IEnumerable<Experiences>>.Invalid(experienceEntities.ValidationErrors);
+                return Result<IEnumerable<BlogPosts>>.Invalid(experienceEntities.ValidationErrors);
             }
             return experienceEntities;
         }
 
-        public async Task<Result<Experiences>> GetExperienceByIdAsync(int id)
+        public async Task<Result<BlogPosts>> GetExperienceByIdAsync(int id)
         {
             var experienceEntity = await _repository.GetByIdAsync(id);
             if (!experienceEntity.IsSuccess)
             {
-                return Result<Experiences>.Invalid(experienceEntity.ValidationErrors);
+                return Result<BlogPosts>.Invalid(experienceEntity.ValidationErrors);
             }
             return experienceEntity;
         }
 
-        public async Task<Result<Experiences>> AddExperienceAsync(ExperiencesCreateDto experienceCreateDto)
+        public async Task<Result<BlogPosts>> AddExperienceAsync(ExperiencesCreateDto experienceCreateDto)
         {
-            var experienceEntity = _mapper.Map<Experiences>(experienceCreateDto);
+            var experienceEntity = _mapper.Map<BlogPosts>(experienceCreateDto);
             var result = await _repository.AddAsync(experienceEntity);
 
             if (!result.IsSuccess)
             {
-                return Result<Experiences>.Invalid(result.ValidationErrors);
+                return Result<BlogPosts>.Invalid(result.ValidationErrors);
             }
             return result;
         }
 
-        public async Task<Result<Experiences>> UpdateExperienceAsync(ExperiencesUpdateDto experienceUpdateDto)
+        public async Task<Result<BlogPosts>> UpdateExperienceAsync(ExperiencesUpdateDto experienceUpdateDto)
         {
             var experienceResult = await _repository.GetByIdAsync(experienceUpdateDto.Id);
             if (!experienceResult.IsSuccess)
             {
-                return Result<Experiences>.Invalid(experienceResult.ValidationErrors);
+                return Result<BlogPosts>.Invalid(experienceResult.ValidationErrors);
             }
 
             _mapper.Map(experienceUpdateDto, experienceResult.Value);
@@ -79,18 +79,18 @@ namespace OA.PortfolioWebSite.Persistance.Services
 
             return await _repository.DeleteAsync(id);
         }
-        public async Task<Result<IEnumerable<Experiences>>> GetExperienceByUserIdAsync(int userId)
+        public async Task<Result<IEnumerable<BlogPosts>>> GetExperienceByUserIdAsync(int userId)
         {
             var experiencesResult = await _repository.GetAllAsync();
 
             if (!experiencesResult.IsSuccess)
             {
                 var errors = string.Join("; ", experiencesResult.Errors);
-                return Result<IEnumerable<Experiences>>.Error(errors);
+                return Result<IEnumerable<BlogPosts>>.Error(errors);
             }
 
             var userExperiences = experiencesResult.Value.Where(e => e.UserId == userId);
-            return Result<IEnumerable<Experiences>>.Success(userExperiences);
+            return Result<IEnumerable<BlogPosts>>.Success(userExperiences);
         }
     }
 }

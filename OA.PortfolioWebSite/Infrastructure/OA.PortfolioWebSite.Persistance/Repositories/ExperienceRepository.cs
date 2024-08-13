@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OA.PortfolioWebSite.Persistance.Repositories
 {
-    public class ExperienceRepository : Repository<Experiences>, IExperienceRepository
+    public class ExperienceRepository : Repository<BlogPosts>, IExperienceRepository
     {
         public ExperienceRepository(DataAPIDbContext context) : base(context) { }
     }
