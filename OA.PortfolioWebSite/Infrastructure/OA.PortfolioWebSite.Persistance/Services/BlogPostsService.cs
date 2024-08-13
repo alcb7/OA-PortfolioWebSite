@@ -87,7 +87,7 @@ namespace OA.PortfolioWebSite.Persistance.Services
                 return Result<IEnumerable<BlogPosts>>.Error(errors);
             }
 
-            var userExperiences = result.Value.Where(e => e.UserId == userId);
+            var userExperiences = result.Value.Where(e => e.AuthorId == userId);
             return Result<IEnumerable<BlogPosts>>.Success(userExperiences);
         }
     }

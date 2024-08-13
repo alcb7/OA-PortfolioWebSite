@@ -17,7 +17,8 @@ namespace OA.PortfolioWebSite.Application
         {
             CreateMap<AboutMe, AboutMeCreateDto>().ReverseMap();
             CreateMap<AboutMe, AboutMeUpdateDto>().ReverseMap();
-            CreateMap<BlogPosts, ExperienceDto>().ReverseMap(); ;
+            CreateMap<BlogPosts, BlogPostsCreateDto>().ReverseMap(); ;
+            CreateMap<BlogPosts, BlogPostsUpdateDto>().ReverseMap(); ;
             CreateMap<ExperiencesCreateDto, BlogPosts>().ReverseMap(); ;
             CreateMap<ExperiencesUpdateDto, BlogPosts>().ReverseMap(); ;
         }

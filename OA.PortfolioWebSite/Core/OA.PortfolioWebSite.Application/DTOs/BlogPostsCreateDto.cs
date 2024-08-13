@@ -13,6 +13,5 @@ namespace OA.PortfolioWebSite.Application.DTOs
         public string Content { get; set; }
         public DateTime PublishDate { get; set; }
         public int AuthorId { get; set; }
-        public ICollection<Comments>? Comments { get; set; }
     }
 }

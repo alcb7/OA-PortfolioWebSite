@@ -35,6 +35,9 @@ public static class ServiceRegistration
         services.AddScoped<IAboutMeService, AboutMeService>();
         services.AddScoped<IExperienceRepository, ExperienceRepository>();
         services.AddScoped<IExperienceService, ExperienceService>();
+        services.AddScoped<IBlogPostsRepository, BlogPostsRepository>();
+
+        services.AddScoped<IBlogPostsService, BlogPostsService>();
 
         services.AddAutoMapper(typeof(MappingProfile));
 

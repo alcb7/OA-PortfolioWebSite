@@ -9,7 +9,7 @@ public static class SeedData
     {
         SeedUsers(authDbContext);
         SeedAboutMe(dataDbContext);
-        SeedExperiences( dataDbContext); // İki context'i de geçiriyoruz
+        //SeedExperiences( dataDbContext); // İki context'i de geçiriyoruz
         SeedBlogPostsAndComments(authDbContext, dataDbContext);
     }
     public static void SeedUsers(AuthAPIDbContext authDbContext)
@@ -53,23 +53,23 @@ public static class SeedData
         }
     }
 
-    public static void SeedExperiences(DataAPIDbContext dataDbContext)
-    {
-        if (!dataDbContext.Experiences.Any())
-        {
-            var experience = new BlogPosts
-            {
-                Title = "Software Engineer",
-                Company = "Tech Corp",
-                StartDate = new DateTime(2024, 1, 1),
-                EndDate = new DateTime(2024, 12, 31),
-                Description = "Developed software applications.",
-                UserId = 0
-            };
-            dataDbContext.Experiences.Add(experience);
-            dataDbContext.SaveChanges();
-        }
-    }
+    //public static void SeedExperiences(DataAPIDbContext dataDbContext)
+    //{
+    //    if (!dataDbContext.Experiences.Any())
+    //    {
+    //        var experience = new BlogPosts
+    //        {
+    //            Title = "Software Engineer",
+    //            Company = "Tech Corp",
+    //            StartDate = new DateTime(2024, 1, 1),
+    //            EndDate = new DateTime(2024, 12, 31),
+    //            Description = "Developed software applications.",
+    //            UserId = 0
+    //        };
+    //        dataDbContext.Experiences.Add(experience);
+    //        dataDbContext.SaveChanges();
+    //    }
+    //}
 
     public static void SeedBlogPostsAndComments(AuthAPIDbContext authDbContext, DataAPIDbContext dataDbContext)
     {
