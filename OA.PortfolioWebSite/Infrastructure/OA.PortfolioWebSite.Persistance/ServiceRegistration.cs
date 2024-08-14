@@ -12,6 +12,7 @@ using OA.PortfolioWebSite.Application;
 using OA.PortfolioWebSite.Persistance.Repositories;
 using OA.PortfolioWebSite.Persistance.Services;
 using OA.PortfolioWebSite.Application.DTOs;
+using OA.PortfolioWebSite.Domain.Entities.Data;
 
 public static class ServiceRegistration
 {
@@ -24,11 +25,11 @@ public static class ServiceRegistration
 
         string dataConnectionString = configurationData.GetConnectionString("DataConnection");
 
-        
+
         services.AddDbContext<DataAPIDbContext>(options =>
             options.UseSqlServer(dataConnectionString));
 
-        
+
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
         services.AddScoped<IAboutMeRepository, AboutMeRepository>();
@@ -36,9 +37,17 @@ public static class ServiceRegistration
         services.AddScoped<IExperienceRepository, ExperienceRepository>();
         services.AddScoped<IExperienceService, ExperienceService>();
         services.AddScoped<IBlogPostsRepository, BlogPostsRepository>();
-
+        services.AddScoped<IProjectsRepository, ProjectsRepository>();
+        services.AddScoped<IProjectsService, ProjectsService>();
         services.AddScoped<IBlogPostsService, BlogPostsService>();
-
+        services.AddScoped<IProjectsRepository, ProjectsRepository>();
+        services.AddScoped<IProjectsService, ProjectsService>();
+        services.AddScoped<IEducationRepository, EducationRepository>();
+        services.AddScoped<IEducationService, EducationsService>();
+        services.AddScoped<IPersonalInfoRepository, PersonalInfoRepository>();
+        services.AddScoped<IPersonalInfoService, PersonalInfoService>();
+        services.AddScoped<IContactMessagesRepository, ContactMessagesRepository>();
+        services.AddScoped<IContactMessagesService, ContactMessagesService>();
         services.AddAutoMapper(typeof(MappingProfile));
 
         services.AddValidatorsFromAssemblyContaining<AboutMeValidator>();
@@ -51,11 +60,10 @@ public static class ServiceRegistration
             var dataDbContext = scope.ServiceProvider.GetRequiredService<DataAPIDbContext>();
 
             // Veritabanını sil ve yeniden oluştur
-         
-            dataDbContext.Database.EnsureDeleted();
+
             dataDbContext.Database.EnsureCreated();
 
-           // SeedData.Initialize(authDbContext, dataDbContext);
+            // SeedData.Initialize(authDbContext, dataDbContext);
         }
     }
 }

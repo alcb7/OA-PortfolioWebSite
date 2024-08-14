@@ -16,10 +16,19 @@ namespace OA.PortfolioWebSite.Application
         {
             CreateMap<AboutMe, AboutMeCreateDto>().ReverseMap();
             CreateMap<AboutMe, AboutMeUpdateDto>().ReverseMap();
-            CreateMap<BlogPosts, BlogPostsCreateDto>().ReverseMap(); ;
-            CreateMap<BlogPosts, BlogPostsUpdateDto>().ReverseMap(); ;
-            CreateMap<ExperiencesCreateDto, BlogPosts>().ReverseMap(); ;
-            CreateMap<ExperiencesUpdateDto, BlogPosts>().ReverseMap(); ;
+            CreateMap<BlogPosts, BlogPostsCreateDto>().ReverseMap();
+            CreateMap<BlogPosts, BlogPostsUpdateDto>().ReverseMap();
+            CreateMap<ExperiencesCreateDto, BlogPosts>().ReverseMap();
+            CreateMap<ExperiencesUpdateDto, BlogPosts>().ReverseMap();
+            CreateMap<ProjectsUpdateDto, Projects>().ReverseMap();
+            CreateMap<ProjectsCreateDto, Projects>().ReverseMap();
+            CreateMap<EducationsCreateDto, Educations>().ReverseMap();
+            CreateMap<EducationsUpdateDto, Educations>().ReverseMap();
+            CreateMap<PersonalInfoCreateDto, PersonalInfo>().ReverseMap();
+            CreateMap<PersonalInfoUpdateDto, PersonalInfo>().ReverseMap();
+            CreateMap<ContactMessagesCreateDto, ContactMessages>().ReverseMap();
+            CreateMap<ContactMessagesUpdateDto, ContactMessages>().ReverseMap();
+
         }
     }
 }
