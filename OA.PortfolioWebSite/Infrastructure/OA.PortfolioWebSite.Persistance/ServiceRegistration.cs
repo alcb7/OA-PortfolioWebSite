@@ -48,6 +48,9 @@ public static class ServiceRegistration
         services.AddScoped<IPersonalInfoService, PersonalInfoService>();
         services.AddScoped<IContactMessagesRepository, ContactMessagesRepository>();
         services.AddScoped<IContactMessagesService, ContactMessagesService>();
+        services.AddScoped<ICommentsRepository, CommentsRepository>();
+        services.AddScoped<ICommentsService, CommentsService>();
+        
         services.AddAutoMapper(typeof(MappingProfile));
 
         services.AddValidatorsFromAssemblyContaining<AboutMeValidator>();

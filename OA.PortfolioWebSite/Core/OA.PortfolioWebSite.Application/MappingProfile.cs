@@ -28,6 +28,8 @@ namespace OA.PortfolioWebSite.Application
             CreateMap<PersonalInfoUpdateDto, PersonalInfo>().ReverseMap();
             CreateMap<ContactMessagesCreateDto, ContactMessages>().ReverseMap();
             CreateMap<ContactMessagesUpdateDto, ContactMessages>().ReverseMap();
+            CreateMap<CommentsCreateDto, Comments>().ReverseMap();
+            CreateMap<CommentsUpdateDto, Comments>().ReverseMap();
 
         }
     }
