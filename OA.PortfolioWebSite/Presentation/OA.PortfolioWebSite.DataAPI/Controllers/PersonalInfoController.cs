@@ -44,56 +44,84 @@ namespace OA.PortfolioWebSite.DataAPI.Controllers
 
             return Ok(result.Value);
         }
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> GetPersonalInfoById(int id)
+        //{
+        //    var result = await _service.GetPersonalInfoByIdAsync(id);
 
-        [HttpPost]
-        public async Task<IActionResult> AddPersonalInfoPersonalInfo([FromBody] PersonalInfoCreateDto dto)
-        {
-            var result = await _service.AddPersonalInfoAsync(dto);
+        //    if (!result.IsSuccess)
+        //    {
+        //        if (result.Status == ResultStatus.NotFound)
+        //            return NotFound(result.ValidationErrors);
 
-            if (!result.IsSuccess)
-            {
-                return BadRequest(result.ValidationErrors);
-            }
+        //        return BadRequest(result.ValidationErrors);
+        //    }
 
-            return CreatedAtAction(nameof(GetPersonalInfoById), new { id = result.Value.Id }, result.Value);
-        }
+        //    return Ok(result.Value);
+        //}
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdatePersonalInfo(int id, [FromBody] PersonalInfoUpdateDto dto)
-        {
-            if (id != dto.Id)
-            {
-                return BadRequest("ID in the URL does not match ID in the body");
-            }
+        //[HttpGet]
+        //public async Task<IActionResult> GetAllPersonalInfo()
+        //{
+        //    var result = await _service.GetAllPersonalInfoAsync();
 
-            var result = await _service.UpdatePersonalInfoAsync(dto);
+        //    if (!result.IsSuccess)
+        //    {
+        //        return BadRequest(result.ValidationErrors);
+        //    }
 
-            if (!result.IsSuccess)
-            {
-                if (result.Status == ResultStatus.NotFound)
-                    return NotFound(result.ValidationErrors);
+        //    return Ok(result.Value);
+        //}
 
-                return BadRequest(result.ValidationErrors);
-            }
+        //[HttpPost]
+        //public async Task<IActionResult> AddPersonalInfoPersonalInfo([FromBody] PersonalInfoCreateDto dto)
+        //{
+        //    var result = await _service.AddPersonalInfoAsync(dto);
 
-            return NoContent();
-        }
+        //    if (!result.IsSuccess)
+        //    {
+        //        return BadRequest(result.ValidationErrors);
+        //    }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePersonalInfo(int id)
-        {
-            var result = await _service.DeletePersonalInfoAsync(id);
+        //    return CreatedAtAction(nameof(GetPersonalInfoById), new { id = result.Value.Id }, result.Value);
+        //}
 
-            if (!result.IsSuccess)
-            {
-                if (result.Status == ResultStatus.NotFound)
-                    return NotFound(result.ValidationErrors);
+        ////[HttpPut("{id}")]
+        ////public async Task<IActionResult> UpdatePersonalInfo(int id, [FromBody] PersonalInfoUpdateDto dto)
+        ////{
+        ////    if (id != dto.Id)
+        ////    {
+        ////        return BadRequest("ID in the URL does not match ID in the body");
+        ////    }
 
-                return BadRequest(result.ValidationErrors);
-            }
+        ////    var result = await _service.UpdatePersonalInfoAsync(dto);
 
-            return NoContent();
-        }
+        ////    if (!result.IsSuccess)
+        ////    {
+        ////        if (result.Status == ResultStatus.NotFound)
+        ////            return NotFound(result.ValidationErrors);
+
+        ////        return BadRequest(result.ValidationErrors);
+        ////    }
+
+        ////    return NoContent();
+        ////}
+
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> DeletePersonalInfo(int id)
+        //{
+        //    var result = await _service.DeletePersonalInfoAsync(id);
+
+        //    if (!result.IsSuccess)
+        //    {
+        //        if (result.Status == ResultStatus.NotFound)
+        //            return NotFound(result.ValidationErrors);
+
+        //        return BadRequest(result.ValidationErrors);
+        //    }
+
+        //    return NoContent();
+        //}
 
     }
 }

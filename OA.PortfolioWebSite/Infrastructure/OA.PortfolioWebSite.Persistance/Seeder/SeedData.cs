@@ -5,12 +5,12 @@ using OA.PortfolioWebSite.Domain.Entities;
 
 public static class SeedData
 {
-    public static void Initialize(AuthAPIDbContext authDbContext, DataAPIDbContext dataDbContext)
+    public static void Initialize( DataAPIDbContext dataDbContext)
     {
-        SeedUsers(authDbContext);
-        SeedAboutMe(dataDbContext);
+       // SeedUsers(authDbContext);
+        SeedPersonelInfo(dataDbContext);
         //SeedExperiences( dataDbContext); // İki context'i de geçiriyoruz
-        SeedBlogPostsAndComments(authDbContext, dataDbContext);
+       // SeedBlogPostsAndComments(authDbContext, dataDbContext);
     }
     public static void SeedUsers(AuthAPIDbContext authDbContext)
     {
@@ -70,6 +70,24 @@ public static class SeedData
     //        dataDbContext.SaveChanges();
     //    }
     //}
+
+    public static void SeedPersonelInfo(DataAPIDbContext dataDbContext)
+    {
+        if (!dataDbContext.PersonalInfo.Any())
+        {
+            var personalInfo = new PersonalInfo
+            {
+                Name = "Ali Rıza",
+                Surname = "Canbulan",
+                About = "John is a software engineer with a passion for developing innovative solutions.",
+                BirthDate = new DateTime(2000, 04, 19), // Örneğin 1 Ocak 1990 doğum tarihi
+               
+            };
+
+            dataDbContext.PersonalInfo.Add(personalInfo);
+            dataDbContext.SaveChanges();
+        }
+    }
 
     public static void SeedBlogPostsAndComments(AuthAPIDbContext authDbContext, DataAPIDbContext dataDbContext)
     {

@@ -31,6 +31,7 @@ namespace OA.PortfolioWebSite.Persistance.Services
             }
             return entities;
         }
+        
 
         public async Task<Result<PersonalInfo>> GetPersonalInfoByIdAsync(int id)
         {

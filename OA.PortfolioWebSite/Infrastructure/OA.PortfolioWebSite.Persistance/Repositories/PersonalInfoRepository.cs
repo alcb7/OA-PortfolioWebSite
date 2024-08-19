@@ -16,5 +16,6 @@ namespace OA.PortfolioWebSite.Persistance.Repositories
         public PersonalInfoRepository(DataAPIDbContext context) : base(context)
         {
         }
+
     }
 }

@@ -63,10 +63,11 @@ public static class ServiceRegistration
             var dataDbContext = scope.ServiceProvider.GetRequiredService<DataAPIDbContext>();
 
             // Veritabanını sil ve yeniden oluştur
+            dataDbContext.Database.EnsureDeleted();
 
             dataDbContext.Database.EnsureCreated();
 
-            // SeedData.Initialize(authDbContext, dataDbContext);
+            SeedData.Initialize( dataDbContext);
         }
     }
 }

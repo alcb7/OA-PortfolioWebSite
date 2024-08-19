@@ -16,5 +16,6 @@ namespace OA.PortfolioWebSite.Application.Interfaces.Services
         Task<Result<PersonalInfo>> AddPersonalInfoAsync(PersonalInfoCreateDto dto);
         Task<Result<PersonalInfo>> UpdatePersonalInfoAsync(PersonalInfoUpdateDto dto);
         Task<Result> DeletePersonalInfoAsync(int id);
+
     }
 }
