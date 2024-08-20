@@ -53,7 +53,7 @@ public static class ServiceRegistration
         
         services.AddAutoMapper(typeof(MappingProfile));
 
-        services.AddValidatorsFromAssemblyContaining<AboutMeValidator>();
+       // services.AddValidatorsFromAssemblyContaining<AboutMeValidator>();
 
         // services.AddScoped<IValidator<AboutMeCreateDto>, AboutMeValidator>();
 
@@ -63,7 +63,7 @@ public static class ServiceRegistration
             var dataDbContext = scope.ServiceProvider.GetRequiredService<DataAPIDbContext>();
 
             // Veritabanını sil ve yeniden oluştur
-            dataDbContext.Database.EnsureDeleted();
+            //dataDbContext.Database.EnsureDeleted();
 
             dataDbContext.Database.EnsureCreated();
 

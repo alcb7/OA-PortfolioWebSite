@@ -1,0 +1,17 @@
+﻿@model OA.PortfolioWebSite.AdminMVC.ViewModels.AboutMeViewModel
+
+<form asp-action="Create" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Introduction"></label>
+        <textarea asp-for="Introduction" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="image1">Upload Image 1</label>
+        <input type="file" class="form-control" name="image1">
+    </div>
+    <div class="form-group">
+        <label for="image2">Upload Image 2</label>
+        <input type="file" class="form-control" name="image2">
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

@@ -1,59 +1,44 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!-- Mobile Metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <!-- Site Metas -->
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <link rel="shortcut icon" href="~/template/images/fevicon.png" type="image/png">
-    <title>OEM</title>
-
-    <!-- bootstrap core css -->
-    <link rel="stylesheet" type="text/css" href="~/assets/css/bootstrap.css" asp-append-version="true" />
-    <link rel="stylesheet" type="text/css" href="~/assets/css/client.css" asp-append-version="true" />
-
-    <!-- fonts style -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
-
-    <!-- owl slider stylesheet -->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-
-    <!-- font awesome style -->
-    <link href="~/template/css/font-awesome.min.css" rel="stylesheet" asp-append-version="true" />
-
-    <!-- Custom styles for this template -->
-    <link href="~/template/css/style.css" rel="stylesheet" asp-append-version="true" />
-    <!-- responsive style -->
-    <link href="~/template/css/responsive.css" rel="stylesheet" asp-append-version="true" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <link rel="shortcut icon" type="image/x-icon" href="~/admin/img/mavi.png">
+    <title>OEM İş Makineleri</title>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Font Awesome CSS CDN -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Select2 CSS CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css">
+    <!-- Tagsinput CSS CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css">
+    <!-- Custom Style CSS -->
+    <link rel="stylesheet" href="~/template/css/style.css">
 </head>
+
 <body>
-    <partial name="_Header" />
+    <partial name="_TopBar" />
+    <partial name="_SideBar" />
 
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
-
-    
-    @await RenderSectionAsync("Scripts", required: false)
-
-    <script type="text/javascript" src="~/assets/js/jquery-3.4.1.min.js" asp-append-version="true"></script>
-    <!-- popper js -->
-@*     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script> *@
-    <!-- bootstrap js -->
-    <script type="text/javascript" src="~/template/js/bootstrap.js" asp-append-version="true"></script>
-    <!-- owl slider -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <!-- custom js -->
-    <script type="text/javascript" src="~/template/js/custom.js" asp-append-version="true"></script> 
-    <!-- Google Map -->
-   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap" async defer></script>
-    <!-- End Google Map -->
+    <!-- jQuery JS CDN -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!-- Popper.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <!-- Bootstrap JS CDN -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- Slimscroll JS CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-slimScroll/1.3.8/jquery.slimscroll.min.js"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <!-- Custom App JS -->
+    <script src="~/template/js/app.js"></script>
 </body>
+
 </html>

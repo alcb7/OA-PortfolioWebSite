@@ -8,7 +8,8 @@ namespace OA.PortfolioWebSite.UserMVC.Controllers
     public class HomeController : Controller
     {
         private readonly HttpClient _httpClient;
-        private readonly string _apiProjectsUrl = "https://localhost:7260/api/PersonalInfo/1";
+        private readonly string _apiPersonelInfoUrl = "https://localhost:7260/api/PersonalInfo/1";
+        private readonly string _apiAboutMeUrl = "https://localhost:7260/api/AboutMe/1";
 
         public HomeController(HttpClient httpClient)
         {
@@ -16,10 +17,20 @@ namespace OA.PortfolioWebSite.UserMVC.Controllers
         }
         public async Task<ActionResult> Index()
         {
-            var projectResponse = await _httpClient.GetFromJsonAsync<PersonelInfoViewModel>(_apiProjectsUrl);
+            // PersonelInfo verisini API'den çekiyoruz.
+            var personelInfoResponse = await _httpClient.GetFromJsonAsync<PersonelInfoViewModel>(_apiPersonelInfoUrl);
 
-            
-            return View(projectResponse);
+            // AboutMe verisini API'den çekiyoruz.
+            var aboutMeResponse = await _httpClient.GetFromJsonAsync<AboutMeViewModel>(_apiAboutMeUrl);
+
+            // ViewModel oluþturup, her iki veriyi de set ediyoruz.
+            var viewModel = new HomeViewModel
+            {
+                PersonelInfo = personelInfoResponse,
+                AboutMe = aboutMeResponse
+            };
+
+            return View(viewModel);
         }
     }
 }

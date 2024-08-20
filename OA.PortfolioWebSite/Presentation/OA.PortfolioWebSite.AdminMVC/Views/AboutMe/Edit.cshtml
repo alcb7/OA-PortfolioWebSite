@@ -1,0 +1,19 @@
+﻿@model OA.PortfolioWebSite.AdminMVC.ViewModels.AboutMeViewModel
+
+<form asp-action="Edit" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Introduction"></label>
+        <textarea asp-for="Introduction" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="image1">Current Image 1:</label>
+        <img src="@Model.ImageUrl1" alt="Image 1" class="img-thumbnail">
+        <input type="file" class="form-control" name="image1">
+    </div>
+    <div class="form-group">
+        <label for="image2">Current Image 2:</label>
+        <img src="@Model.ImageUrl2" alt="Image 2" class="img-thumbnail">
+        <input type="file" class="form-control" name="image2">
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
