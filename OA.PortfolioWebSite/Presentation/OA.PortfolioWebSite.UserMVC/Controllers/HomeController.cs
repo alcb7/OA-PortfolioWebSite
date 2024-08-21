@@ -10,6 +10,8 @@ namespace OA.PortfolioWebSite.UserMVC.Controllers
         private readonly HttpClient _httpClient;
         private readonly string _apiPersonelInfoUrl = "https://localhost:7260/api/PersonalInfo/1";
         private readonly string _apiAboutMeUrl = "https://localhost:7260/api/AboutMe/1";
+        private readonly string _apiEducationsUrl = "https://localhost:7260/api/Educations";
+
 
         public HomeController(HttpClient httpClient)
         {
@@ -19,6 +21,7 @@ namespace OA.PortfolioWebSite.UserMVC.Controllers
         {
             var personelInfoResponse = await _httpClient.GetFromJsonAsync<PersonelInfoViewModel>(_apiPersonelInfoUrl);
             var aboutMeResponse = await _httpClient.GetFromJsonAsync<AboutMeViewModel>(_apiAboutMeUrl);
+            var educationsResponse = await _httpClient.GetFromJsonAsync<List<EducationsViewModel>>(_apiEducationsUrl);
 
             // Sadece dosya adýný almak için Path.GetFileName kullanýyoruz
             aboutMeResponse.ImageUrl1 = Path.GetFileName(aboutMeResponse.ImageUrl1);
@@ -27,7 +30,8 @@ namespace OA.PortfolioWebSite.UserMVC.Controllers
             var viewModel = new HomeViewModel
             {
                 PersonelInfo = personelInfoResponse,
-                AboutMe = aboutMeResponse
+                AboutMe = aboutMeResponse,
+                Educations = educationsResponse
             };
 
             return View(viewModel);
