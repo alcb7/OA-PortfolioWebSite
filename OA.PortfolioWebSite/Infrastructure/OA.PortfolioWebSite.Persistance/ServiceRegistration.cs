@@ -31,6 +31,8 @@ public static class ServiceRegistration
 
 
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+        services.AddScoped<IFileService, FileService>();
+
 
         services.AddScoped<IAboutMeRepository, AboutMeRepository>();
         services.AddScoped<IAboutMeService, AboutMeService>();

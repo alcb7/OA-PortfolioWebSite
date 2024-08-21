@@ -17,13 +17,13 @@ namespace OA.PortfolioWebSite.UserMVC.Controllers
         }
         public async Task<ActionResult> Index()
         {
-            // PersonelInfo verisini API'den çekiyoruz.
             var personelInfoResponse = await _httpClient.GetFromJsonAsync<PersonelInfoViewModel>(_apiPersonelInfoUrl);
-
-            // AboutMe verisini API'den çekiyoruz.
             var aboutMeResponse = await _httpClient.GetFromJsonAsync<AboutMeViewModel>(_apiAboutMeUrl);
 
-            // ViewModel oluþturup, her iki veriyi de set ediyoruz.
+            // Sadece dosya adýný almak için Path.GetFileName kullanýyoruz
+            aboutMeResponse.ImageUrl1 = Path.GetFileName(aboutMeResponse.ImageUrl1);
+            aboutMeResponse.ImageUrl2 = Path.GetFileName(aboutMeResponse.ImageUrl2);
+
             var viewModel = new HomeViewModel
             {
                 PersonelInfo = personelInfoResponse,

@@ -1,6 +1,6 @@
 ﻿@model OA.PortfolioWebSite.AdminMVC.ViewModels.AboutMeViewModel
 
-<form asp-action="Edit" enctype="multipart/form-data">
+<form asp-action="Edit" asp-controller="AboutMe" enctype="multipart/form-data">
     <div class="form-group">
         <label asp-for="Introduction"></label>
         <textarea asp-for="Introduction" class="form-control"></textarea>

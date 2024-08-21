@@ -34,40 +34,39 @@ namespace OA.PortfolioWebSite.AdminMVC.Controllers
                 return BadRequest("ID in the URL does not match ID in the form");
             }
 
-            // Dosya yolu
-            var directoryPath = Path.Combine("wwwroot", "images");
-            if (!Directory.Exists(directoryPath))
-            {
-                Directory.CreateDirectory(directoryPath);
-            }
-
             if (ModelState.IsValid)
             {
                 if (image1 != null)
                 {
-                    var safeFileName = Path.GetFileName(image1.FileName); 
-                    var filePath = Path.Combine(directoryPath, safeFileName);
-                    using (var stream = System.IO.File.Create(filePath))
+                    var response = await _httpClient.PostAsync("https://localhost:7051/api/File/upload", new MultipartFormDataContent
+            {
+                { new StreamContent(image1.OpenReadStream()), "file", image1.FileName }
+            });
+
+                    if (response.IsSuccessStatusCode)
                     {
-                        await image1.CopyToAsync(stream);
+                        var fileResult = await response.Content.ReadFromJsonAsync<FileUploadResult>();
+                        aboutMe.ImageUrl1 = fileResult.Url;
                     }
-                    aboutMe.ImageUrl1 = "/images/" + safeFileName;
                 }
 
                 if (image2 != null)
                 {
-                    var safeFileName = Path.GetFileName(image2.FileName); // Geçersiz karakterleri kaldırır
-                    var filePath = Path.Combine(directoryPath, safeFileName);
-                    using (var stream = System.IO.File.Create(filePath))
+                    var response = await _httpClient.PostAsync("https://localhost:7051/api/File/upload", new MultipartFormDataContent
+            {
+                { new StreamContent(image2.OpenReadStream()), "file", image2.FileName }
+            });
+
+                    if (response.IsSuccessStatusCode)
                     {
-                        await image2.CopyToAsync(stream);
+                        var fileResult = await response.Content.ReadFromJsonAsync<FileUploadResult>();
+                        aboutMe.ImageUrl2 = fileResult.Url;
                     }
-                    aboutMe.ImageUrl2 = "/images/" + safeFileName;
                 }
 
-                var response = await _httpClient.PutAsJsonAsync($"{_apiBaseUrl}/{id}", aboutMe);
+                var updateResponse = await _httpClient.PutAsJsonAsync($"{_apiBaseUrl}/{id}", aboutMe);
 
-                if (response.IsSuccessStatusCode)
+                if (updateResponse.IsSuccessStatusCode)
                 {
                     return RedirectToAction("Index");
                 }
@@ -75,6 +74,12 @@ namespace OA.PortfolioWebSite.AdminMVC.Controllers
 
             return View(aboutMe);
         }
+
+        public class FileUploadResult
+        {
+            public string Url { get; set; }
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
