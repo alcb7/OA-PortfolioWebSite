@@ -41,7 +41,6 @@ namespace OA.PortfolioWebSite.AuthAPI.Controllers
             var newUser = new User
             {
                 Username = registerDto.Username,
-                Role = registerDto.Role,
                 Name = registerDto.Name,
                 SurName = registerDto.SurName,
             };

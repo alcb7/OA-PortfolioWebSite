@@ -1,6 +1,20 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    Layout = null;
 }
-<h1>@ViewData["Title"]</h1>
+@if (User.Identity.IsAuthenticated)
+{
+    <p>Hoşgeldiniz, @User.Identity.Name</p>
 
-<p>Use this page to detail your site's privacy policy.</p>
+    @if (User.IsInRole("admin"))
+    {
+        <p>Rolünüz: Admin</p>
+    }
+    else
+    {
+        <p>Rolünüz: Commenter</p>
+    }
+}
+else
+{
+    <p>Giriş yapmadınız.</p>
+}

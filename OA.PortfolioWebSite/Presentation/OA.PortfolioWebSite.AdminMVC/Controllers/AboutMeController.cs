@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OA.PortfolioWebSite.AdminMVC.ViewModels;
 
 namespace OA.PortfolioWebSite.AdminMVC.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class AboutMeController : Controller
     {
         private readonly HttpClient _httpClient;

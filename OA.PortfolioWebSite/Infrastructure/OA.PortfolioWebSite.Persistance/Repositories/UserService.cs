@@ -23,7 +23,11 @@ namespace OA.PortfolioWebSite.Persistance.Services
 
         public async Task<User> Authenticate(string username, string password)
         {
-            var user = await _context.Users.SingleOrDefaultAsync(x => x.Username == username);
+            // Kullanıcıyı Role ile birlikte yüklemek için Include kullanıyoruz
+            var user = await _context.Users
+                .Include(u => u.Role)  // Role navigasyon özelliğini yükler
+                .SingleOrDefaultAsync(x => x.Username == username);
+
             if (user == null)
                 return null;
 
@@ -49,12 +53,16 @@ namespace OA.PortfolioWebSite.Persistance.Services
 
         public async Task<User> GetUserById(int id)
         {
-            return await _context.Users.FindAsync(id);
+            return await _context.Users
+                .Include(u => u.Role)  // Role navigasyon özelliğini yükler
+                .SingleOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task<IEnumerable<User>> GetAllUsers()
         {
-            return await _context.Users.ToListAsync();
+            return await _context.Users
+                .Include(u => u.Role)  // Role navigasyon özelliğini yükler
+                .ToListAsync();
         }
 
         public async Task<bool> UserExists(string username)
@@ -85,11 +93,16 @@ namespace OA.PortfolioWebSite.Persistance.Services
         }
         public async Task<Result<User>> GetUserByIdAsync(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var user = await _context.Users
+                .Include(u => u.Role)  // Role navigasyon özelliğini yükler
+                .SingleOrDefaultAsync(u => u.Id == id);  // FindAsync yerine SingleOrDefaultAsync kullanıyoruz
+
             if (user == null)
                 return Result<User>.NotFound();
 
             return Result<User>.Success(user);
         }
+
     }
+
 }

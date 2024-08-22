@@ -7,43 +7,44 @@ public static class SeedData
 {
     public static void Initialize(DataAPIDbContext dataDbContext)
     {
-        // SeedUsers(authDbContext);
+       
         SeedPersonelInfo(dataDbContext);
         //SeedExperiences( dataDbContext); // İki context'i de geçiriyoruz
         SeedAboutMe(dataDbContext);
         SeedEducations(dataDbContext);
         // SeedBlogPostsAndComments(authDbContext, dataDbContext);
     }
-    public static void SeedUsers(AuthAPIDbContext authDbContext)
-    {
-        if (!authDbContext.Users.Any())
-        {
-            var user1 = new User
-            {
-                Username = "admin",
-                Name = "Asdasda",
-                SurName = "Xxxxxxxxx",
-                PasswordHash = "fakepasswordhash1",
-                PasswordSalt = "assasdasdsaszzz",
-                Role = "admin",
+   
+    //public static void SeedUsers(AuthAPIDbContext authDbContext)
+    //{
+    //    if (!authDbContext.Users.Any())
+    //    {
+    //        var user1 = new User
+    //        {
+    //            Username = "admin",
+    //            Name = "Asdasda",
+    //            SurName = "Xxxxxxxxx",
+    //            PasswordHash = "fakepasswordhash1",
+    //            PasswordSalt = "assasdasdsaszzz",
+    //            Role = "admin",
 
-            };
+    //        };
 
-            var user2 = new User
-            {
-                Username = "commenter",
-                Name = "Ahmet",
-                SurName = "Xxxxxxxxx",
-                PasswordHash = "fakepasswordhash2",
-                PasswordSalt = "assasdasdsa",
-                Role = "commenter",
+    //        var user2 = new User
+    //        {
+    //            Username = "commenter",
+    //            Name = "Ahmet",
+    //            SurName = "Xxxxxxxxx",
+    //            PasswordHash = "fakepasswordhash2",
+    //            PasswordSalt = "assasdasdsa",
+    //            Role = "commenter",
 
-            };
+    //        };
 
-            authDbContext.Users.AddRange(user1, user2);
-            authDbContext.SaveChanges();
-        }
-    }
+    //        authDbContext.Users.AddRange(user1, user2);
+    //        authDbContext.SaveChanges();
+    //    }
+    //}
 
     public static void SeedAboutMe(DataAPIDbContext dataDbContext)
     {
