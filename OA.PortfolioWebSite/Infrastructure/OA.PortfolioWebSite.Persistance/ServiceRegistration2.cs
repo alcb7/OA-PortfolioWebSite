@@ -46,7 +46,7 @@ namespace OA.PortfolioWebSite.Persistance
             using (var scope = serviceProvider.CreateScope())
             {
                 var authDbContext = scope.ServiceProvider.GetRequiredService<AuthAPIDbContext>();
-                authDbContext.Database.EnsureDeleted();
+                //authDbContext.Database.EnsureDeleted();
 
                 // Veritabanını sil ve yeniden oluştur
                 authDbContext.Database.EnsureCreated();
