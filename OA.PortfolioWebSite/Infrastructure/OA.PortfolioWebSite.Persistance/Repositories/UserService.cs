@@ -55,7 +55,23 @@ namespace OA.PortfolioWebSite.Persistance.Services
         {
             return await _context.Users
                 .Include(u => u.Role)  // Role navigasyon özelliğini yükler
-                .SingleOrDefaultAsync(u => u.Id == id);
+                .Where(u => u.Id == id)
+                .Select(u => new User
+                {
+                    Id = u.Id,
+                    RoleId = u.RoleId,
+                    Username = u.Username,
+                    Name = u.Name,
+                    SurName = u.SurName,
+                    PasswordHash = "",
+                    PasswordSalt = "",
+                    Role = new Role
+                    {
+                        Id = u.RoleId,
+                        RoleName = u.Role.RoleName,
+                        Users = new User[] { }
+                    }
+                }).SingleOrDefaultAsync();
         }
 
         public async Task<IEnumerable<User>> GetAllUsers()

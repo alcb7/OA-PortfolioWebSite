@@ -50,14 +50,43 @@ namespace OA.PortfolioWebSite.AuthAPI.Controllers
             var createdUser = await _userService.Register(newUser, registerDto.Password);
             return Ok(createdUser);
         }
-        [HttpGet("{id}")]
+        [HttpGet("user/{id}")]
         public async Task<IActionResult> GetUserById(int id)
         {
-            var user = await _userService.GetUserById(id);
-            if (user == null)
-                return NotFound();
+            try
+            {
+                var user = await _userService.GetUserById(id);
+                if (user == null)
+                    return NotFound();
 
-            return Ok(user);
+                return Ok(user);
+            }
+            catch(Exception ex)
+            {
+                return Ok(new { message = ex.Message, stacktrace = ex.StackTrace });
+                //await AppendLog(ex);
+            }
+
+            return StatusCode(501);
+        }
+
+        private async Task AppendLog(Exception ex)
+        {
+            string fileName = $"custom-{DateTime.UtcNow:yyyy-mm-dd}.log";
+            string folderName = "logs";
+            folderName = Path.Combine(Environment.CurrentDirectory, folderName);
+
+            if (!Directory.Exists(folderName))
+            {
+                Directory.CreateDirectory(folderName);
+            }
+            fileName = Path.Combine(folderName, fileName);
+            var doubleNewline = $"{Environment.NewLine}{Environment.NewLine}";
+
+            var log = $"{DateTime.UtcNow:HH:mm:ss.fff} - [ERROR] Message: {ex.Message}{doubleNewline}" +
+                $"StackTrace: {ex.StackTrace}{doubleNewline}";
+
+            await System.IO.File.AppendAllTextAsync(fileName, log);
         }
 
 

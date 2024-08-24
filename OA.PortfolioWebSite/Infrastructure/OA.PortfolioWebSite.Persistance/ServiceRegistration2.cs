@@ -20,40 +20,24 @@ namespace OA.PortfolioWebSite.Persistance
 {
     public static class ServiceRegistration2
     {
-        public static void AddPersistenceServices2(IServiceCollection services)
+        public static void AddPersistenceServices2(IServiceCollection services, IConfiguration configuration)
         {
-            ConfigurationManager configurationAuth = new();
-            configurationAuth.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../OA.PortfolioWebSite.AuthAPI"));
-            configurationAuth.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-
-            
-
-            string authConnectionString = configurationAuth.GetConnectionString("AuthConnection");
+            string authConnectionString = configuration.GetConnectionString("AuthConnection");
 
             services.AddDbContext<AuthAPIDbContext>(options =>
                 options.UseSqlServer(authConnectionString));
-           
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IJwtTokenService, JwtTokenService>();
-
-           
-
-
-            // services.AddScoped<IValidator<AboutMeCreateDto>, AboutMeValidator>();
 
             var serviceProvider = services.BuildServiceProvider();
             using (var scope = serviceProvider.CreateScope())
             {
                 var authDbContext = scope.ServiceProvider.GetRequiredService<AuthAPIDbContext>();
-                //authDbContext.Database.EnsureDeleted();
-
-                // Veritabanını sil ve yeniden oluştur
                 authDbContext.Database.EnsureCreated();
-
-
                 SeedAuthData.Initializeauth(authDbContext);
             }
         }
     }
+
 }
