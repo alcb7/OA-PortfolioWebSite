@@ -18,15 +18,30 @@ namespace OA.PortfolioWebSite.AdminMVC.Controllers
         public async Task<IActionResult> Index()
         {
             var projects = await _httpClient.GetFromJsonAsync<List<ProjectViewModel>>(_apiBaseUrl);
+
+            // Her proje için ImageUrl'yi tam URL'ye çeviriyoruz
+            foreach (var project in projects)
+            {
+                project.ImageUrl = $"https://localhost:7051/api/File?fileName={Path.GetFileName(project.ImageUrl)}";
+            }
+
             return View(projects);
         }
+
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var project = await _httpClient.GetFromJsonAsync<ProjectViewModel>($"{_apiBaseUrl}/{id}");
+
+            // Sadece dosya adını almak için Path.GetFileName kullanıyoruz
+            project.ImageUrl = Path.GetFileName(project.ImageUrl);
+
+            
+
             return View(project);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> Edit(int id, ProjectViewModel project, IFormFile image)

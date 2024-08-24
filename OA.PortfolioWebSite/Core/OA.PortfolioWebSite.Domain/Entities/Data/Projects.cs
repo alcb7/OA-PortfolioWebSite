@@ -13,6 +13,5 @@ namespace OA.PortfolioWebSite.Domain.Entities.Data
         public string Title { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
-        public int UserId { get; set; }
     }
 }

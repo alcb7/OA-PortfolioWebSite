@@ -52,9 +52,9 @@ public static class SeedData
         {
             var projects = new List<Projects>
         {
-            new Projects { Title = "Project Alpha", Description = "This is the first project description.", ImageUrl = "alpha_project.jpeg", UserId = 1 },
-            new Projects { Title = "Project Beta", Description = "This is the second project description.", ImageUrl = "beta_project.jpeg", UserId = 2 },
-            new Projects{ Title = "Project Gamma", Description = "This is the third project description.", ImageUrl = "gamma_project.jpeg", UserId = 3 }
+            new Projects { Title = "Project Alpha", Description = "This is the first project description.", ImageUrl = "alpha_project.jpeg" },
+            new Projects { Title = "Project Beta", Description = "This is the second project description.", ImageUrl = "beta_project.jpeg" },
+            new Projects{ Title = "Project Gamma", Description = "This is the third project description.", ImageUrl = "gamma_project.jpeg"}
         };
 
             dataDbContext.Projects.AddRange(projects);
