@@ -1,0 +1,34 @@
+﻿@model List<OA.PortfolioWebSite.AdminMVC.ViewModels.EducationsViewModel>
+
+<!-- Create butonunu sayfanın üst kısmına ekliyoruz -->
+<div class="mb-3">
+    <a asp-action="Create" class="btn btn-success">Create New Education</a>
+</div>
+
+@foreach (var education in Model)
+{
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">@education.Degree</h5>
+            <p class="card-text"><strong>School:</strong> @education.School</p>
+            <p class="card-text"><strong>Start Date:</strong> @education.StartDate.ToString("yyyy-MM-dd")</p>
+            <p class="card-text">
+                <strong>End Date:</strong>
+                @if (education.EndDate.HasValue)
+                {
+                    @education.EndDate.Value.ToString("yyyy-MM-dd")
+                }
+                else
+                {
+                    <span>Ongoing</span>
+                }
+            </p>
+            
+
+            <a asp-action="Edit" asp-route-id="@education.Id" class="btn btn-primary">Edit</a>
+            <form asp-action="Delete" asp-route-id="@education.Id" method="post" style="display:inline;">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
+}

@@ -5,20 +5,20 @@ using OA.PortfolioWebSite.AdminMVC.ViewModels;
 namespace OA.PortfolioWebSite.AdminMVC.Controllers
 {
     [Authorize(Roles = "admin")]
-    public class PersonelInfoController : Controller
+    public class EducationsController : Controller
     {
         private readonly HttpClient _httpClient;
-        private readonly string _apiBaseUrl = "https://localhost:7260/api/PersonalInfo";
+        private readonly string _apiBaseUrl = "https://localhost:7260/api/Educations";
 
-        public PersonelInfoController(HttpClient httpClient)
+        public EducationsController(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }
 
         public async Task<IActionResult> Index()
         {
-            var projects = await _httpClient.GetFromJsonAsync<PersonelInfoViewModel>(_apiBaseUrl + "/1");
-            
+            var projects = await _httpClient.GetFromJsonAsync<List<EducationsViewModel>>(_apiBaseUrl);
+
             // Her proje için ImageUrl'yi tam URL'ye çeviriyoruz
 
 
@@ -29,10 +29,10 @@ namespace OA.PortfolioWebSite.AdminMVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var project = await _httpClient.GetFromJsonAsync<PersonelInfoViewModel>($"{_apiBaseUrl}/{id}");
+            var project = await _httpClient.GetFromJsonAsync<EducationsViewModel>($"{_apiBaseUrl}/{id}");
 
             // Sadece dosya adını almak için Path.GetFileName kullanıyoruz
-            
+
 
 
 
@@ -41,7 +41,7 @@ namespace OA.PortfolioWebSite.AdminMVC.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, PersonelInfoViewModel project)
+        public async Task<IActionResult> Edit(int id, EducationsViewModel project)
         {
             if (id != project.Id)
             {
@@ -50,7 +50,7 @@ namespace OA.PortfolioWebSite.AdminMVC.Controllers
 
             if (ModelState.IsValid)
             {
-                
+
 
                 var updateResponse = await _httpClient.PutAsJsonAsync($"{_apiBaseUrl}/{id}", project);
 
@@ -62,8 +62,8 @@ namespace OA.PortfolioWebSite.AdminMVC.Controllers
 
             return View(project);
         }
-        
-        
+
+
 
         [HttpPost]
         public async Task<IActionResult> Delete(int id)

@@ -1,0 +1,40 @@
+﻿@model OA.PortfolioWebSite.AdminMVC.ViewModels.PersonelInfoViewModel
+
+<form asp-action="Edit" asp-controller="PersonelInfo" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="About"></label>
+        <textarea asp-for="About" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Surname"></label>
+        <input asp-for="Surname" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="BirthDate"></label>
+        <input asp-for="BirthDate" type="date" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Adress"></label>
+        <input asp-for="Adress" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" type="email" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Phone"></label>
+        <input asp-for="Phone" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="MyProperty"></label>
+        <input asp-for="MyProperty" class="form-control" />
+    </div>
+  
+    
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+

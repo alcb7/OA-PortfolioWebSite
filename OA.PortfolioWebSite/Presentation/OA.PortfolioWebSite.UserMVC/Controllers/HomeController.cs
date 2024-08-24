@@ -13,8 +13,8 @@ namespace OA.PortfolioWebSite.UserMVC.Controllers
         private readonly string _apiPersonelInfoUrl = "https://localhost:7260/api/PersonalInfo/1";
         private readonly string _apiAboutMeUrl = "https://localhost:7260/api/AboutMe/1";
         private readonly string _apiEducationsUrl = "https://localhost:7260/api/Educations";
-        private readonly string _apiContactUrl = "https://localhost:7260/api/PostContactMessage"; // Yeni eklenen API URL
-
+        private readonly string _apiContactUrl = "https://localhost:7260/api/PostContactMessage";
+        private readonly string _apiblogposttUrl = "https://localhost:7260/api/BlogPosts";
         public HomeController(HttpClient httpClient)
         {
             _httpClient = httpClient;
@@ -24,17 +24,23 @@ namespace OA.PortfolioWebSite.UserMVC.Controllers
         {
             var personelInfoResponse = await _httpClient.GetFromJsonAsync<PersonelInfoViewModel>(_apiPersonelInfoUrl);
             var aboutMeResponse = await _httpClient.GetFromJsonAsync<AboutMeViewModel>(_apiAboutMeUrl);
+            var blogPostResponse = await _httpClient.GetFromJsonAsync<List<BlogPostsViewModel>>(_apiblogposttUrl);
             var educationsResponse = await _httpClient.GetFromJsonAsync<List<EducationsViewModel>>(_apiEducationsUrl);
 
             // Sadece dosya adýný almak için Path.GetFileName kullanýyoruz
             aboutMeResponse.ImageUrl1 = Path.GetFileName(aboutMeResponse.ImageUrl1);
             aboutMeResponse.ImageUrl2 = Path.GetFileName(aboutMeResponse.ImageUrl2);
+            foreach (var blogPost in blogPostResponse)
+            {
+                blogPost.ImageUrl = $"https://localhost:7051/api/File?fileName={Path.GetFileName(blogPost.ImageUrl)}";
+            }
 
             var viewModel = new HomeViewModel
             {
                 PersonelInfo = personelInfoResponse,
                 AboutMe = aboutMeResponse,
-                Educations = educationsResponse
+                Educations = educationsResponse,
+                BlogPosts = blogPostResponse,
             };
 
             return View(viewModel);

@@ -1,0 +1,26 @@
+﻿@model List<OA.PortfolioWebSite.AdminMVC.ViewModels.BlogViewModel>
+
+<!-- Create butonunu sayfanın üst kısmına ekliyoruz -->
+<div class="mb-3">
+    <a asp-action="Create" class="btn btn-success">Create New Blog Post</a>
+</div>
+
+@foreach (var blogPost in Model)
+{
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">@blogPost.Title</h5>
+            <p class="card-text">@blogPost.Content</p>
+            <p class="card-text"><small class="text-muted">Published on @blogPost.PublishDate.ToString("MMMM dd, yyyy")</small></p>
+            <!-- Resim API'den çekilecek şekilde ayarlandı -->
+            <img src="@blogPost.ImageUrl" alt="Blog Image" class="img-thumbnail">
+            <a asp-action="Edit" asp-route-id="@blogPost.Id" class="btn btn-primary">Edit</a>
+            <form asp-action="Delete" asp-route-id="@blogPost.Id" method="post" style="display:inline;">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
+}
+<div class="mb-3">
+    <a asp-controller="Blog" asp-action="Create" class="btn btn-success">Create New Project</a>
+</div>

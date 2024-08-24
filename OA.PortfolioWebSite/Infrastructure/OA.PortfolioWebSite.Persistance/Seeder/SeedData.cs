@@ -13,7 +13,7 @@ public static class SeedData
         //SeedExperiences( dataDbContext); // İki context'i de geçiriyoruz
         SeedAboutMe(dataDbContext);
         SeedEducations(dataDbContext);
-        // SeedBlogPostsAndComments(authDbContext, dataDbContext);
+        SeedBlogPostsAndComments( dataDbContext);
     }
 
     //public static void SeedUsers(AuthAPIDbContext authDbContext)
@@ -52,9 +52,9 @@ public static class SeedData
         {
             var projects = new List<Projects>
         {
-            new Projects { Title = "Project Alpha", Description = "This is the first project description.", ImageUrl = "alpha_project.jpeg" },
-            new Projects { Title = "Project Beta", Description = "This is the second project description.", ImageUrl = "beta_project.jpeg" },
-            new Projects{ Title = "Project Gamma", Description = "This is the third project description.", ImageUrl = "gamma_project.jpeg"}
+            new Projects { Title = "Project Alpha", Description = "This is the first project description.", ImageUrl = "möç.png" },
+            new Projects { Title = "Project Beta", Description = "This is the second project description.", ImageUrl = "möç.png" },
+            new Projects{ Title = "Project Gamma", Description = "This is the third project description.", ImageUrl = "möç.png"}
         };
 
             dataDbContext.Projects.AddRange(projects);
@@ -151,20 +151,23 @@ public static class SeedData
         }
     }
 
-    public static void SeedBlogPostsAndComments(AuthAPIDbContext authDbContext, DataAPIDbContext dataDbContext)
+    public static void SeedBlogPostsAndComments(DataAPIDbContext dataDbContext)
     {
         if (!dataDbContext.BlogPosts.Any())
         {
-            var user1 = authDbContext.Users.FirstOrDefault(u => u.Username == "admin");
+            
 
-            if (user1 != null)
-            {
+           
+            
                 var blogPost = new BlogPosts
                 {
                     Title = "My First Blog Post",
                     Content = "This is my first blog post.",
                     PublishDate = DateTime.Now,
-                    AuthorId = user1.Id // Doğru AuthorId atandı
+                    AuthorId = 2 // Doğru AuthorId atandı
+                    ,
+                    ImageUrl = "möç.png"
+                    
                 };
 
                 dataDbContext.BlogPosts.Add(blogPost);
@@ -180,7 +183,7 @@ public static class SeedData
 
                 dataDbContext.Comments.Add(comment);
                 dataDbContext.SaveChanges();
-            }
+            
         }
     }
 
