@@ -30,6 +30,7 @@ namespace OA.PortfolioWebSite.Application
             CreateMap<ContactMessagesUpdateDto, ContactMessages>().ReverseMap();
             CreateMap<CommentsCreateDto, Comments>().ReverseMap();
             CreateMap<CommentsUpdateDto, Comments>().ReverseMap();
+            CreateMap<SendContactDto, ContactMessages>().ReverseMap();
 
         }
     }

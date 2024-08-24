@@ -52,7 +52,22 @@ public static class ServiceRegistration
         services.AddScoped<IContactMessagesService, ContactMessagesService>();
         services.AddScoped<ICommentsRepository, CommentsRepository>();
         services.AddScoped<ICommentsService, CommentsService>();
-        
+       // services.AddScoped<ISendContactService, SendContactService>();
+        services.AddScoped<ISendContactService, SendContactService>(provider =>
+        {
+            var configuration = provider.GetRequiredService<IConfiguration>();
+            return new SendContactService(
+                provider.GetRequiredService<DataAPIDbContext>(),
+                configuration["Smtp:Server"],             // string smtpServer
+                int.Parse(configuration["Smtp:Port"]),    // int smtpPort
+                configuration["Smtp:Username"],           // string smtpUsername
+                configuration["Smtp:Password"],           // string smtpPassword
+                configuration["Smtp:ReceiverEmail"]       // string receiverEmail
+            );
+        });
+
+
+
         services.AddAutoMapper(typeof(MappingProfile));
 
        // services.AddValidatorsFromAssemblyContaining<AboutMeValidator>();

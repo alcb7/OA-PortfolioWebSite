@@ -7,14 +7,15 @@ public static class SeedData
 {
     public static void Initialize(DataAPIDbContext dataDbContext)
     {
-       
+        SeedProjects(dataDbContext);
+
         SeedPersonelInfo(dataDbContext);
         //SeedExperiences( dataDbContext); // İki context'i de geçiriyoruz
         SeedAboutMe(dataDbContext);
         SeedEducations(dataDbContext);
         // SeedBlogPostsAndComments(authDbContext, dataDbContext);
     }
-   
+
     //public static void SeedUsers(AuthAPIDbContext authDbContext)
     //{
     //    if (!authDbContext.Users.Any())
@@ -45,6 +46,21 @@ public static class SeedData
     //        authDbContext.SaveChanges();
     //    }
     //}
+    public static void SeedProjects(DataAPIDbContext dataDbContext)
+    {
+        if (!dataDbContext.Projects.Any())
+        {
+            var projects = new List<Projects>
+        {
+            new Projects { Title = "Project Alpha", Description = "This is the first project description.", ImageUrl = "alpha_project.jpeg", UserId = 1 },
+            new Projects { Title = "Project Beta", Description = "This is the second project description.", ImageUrl = "beta_project.jpeg", UserId = 2 },
+            new Projects{ Title = "Project Gamma", Description = "This is the third project description.", ImageUrl = "gamma_project.jpeg", UserId = 3 }
+        };
+
+            dataDbContext.Projects.AddRange(projects);
+            dataDbContext.SaveChanges();
+        }
+    }
 
     public static void SeedAboutMe(DataAPIDbContext dataDbContext)
     {

@@ -1,0 +1,16 @@
+﻿@model List<OA.PortfolioWebSite.AdminMVC.ViewModels.ProjectViewModel>
+
+@foreach (var project in Model)
+{
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">@project.Title</h5>
+            <p class="card-text">@project.Description</p>
+            <img src="@project.ImageUrl" alt="Project Image" class="img-thumbnail">
+            <a asp-action="Edit" asp-route-id="@project.Id" class="btn btn-primary">Edit</a>
+            <form asp-action="Delete" asp-route-id="@project.Id" method="post" style="display:inline;">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
+}
