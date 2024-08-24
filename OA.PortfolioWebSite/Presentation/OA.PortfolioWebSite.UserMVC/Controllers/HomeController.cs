@@ -36,5 +36,22 @@ namespace OA.PortfolioWebSite.UserMVC.Controllers
 
             return View(viewModel);
         }
+        [HttpGet]
+        public async Task<IActionResult> DownloadCV()
+        {
+            var apiUrl = "https://localhost:7051/api/file/download-cv";
+
+            var response = await _httpClient.GetAsync(apiUrl);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return NotFound();
+            }
+
+            var fileBytes = await response.Content.ReadAsByteArrayAsync();
+            return File(fileBytes, "application/pdf", "alirizacanbulan_cv.pdf");
+        }
     }
 }
+
+

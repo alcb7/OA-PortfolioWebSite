@@ -51,6 +51,21 @@ namespace OA.PortfolioWebSite.FileAPI.Controllers
             var mimeType = "image/jpeg"; // Dosya uzantısına göre ayarlayın, örneğin: "image/png"
             return PhysicalFile(filePath, mimeType);
         }
+        [HttpGet("download-cv")]
+        public IActionResult DownloadCV()
+        {
+            // Dosya yolunu belirlerken wwwroot'u dahil etmeyi unutmayın
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/files", "cv.pdf");
+
+            if (!System.IO.File.Exists(filePath))
+            {
+                return NotFound();
+            }
+
+            var fileBytes = System.IO.File.ReadAllBytes(filePath);
+            return File(fileBytes, "application/pdf", "cv.pdf");
+        }
+
 
         //private readonly IFileService _fileService;
 
