@@ -5,6 +5,7 @@ using OA.PortfolioWebSite.Application.DTOs;
 using OA.PortfolioWebSite.Application.Interfaces.Repositories;
 using OA.PortfolioWebSite.Domain.Entities;
 using OA.PortfolioWebSite.Domain.Entities.Auth;
+using System.Data;
 
 namespace OA.PortfolioWebSite.AuthAPI.Controllers
 {
@@ -41,9 +42,9 @@ namespace OA.PortfolioWebSite.AuthAPI.Controllers
             var newUser = new User
             {
                 Username = registerDto.Username,
-                Role = registerDto.Role,
                 Name = registerDto.Name,
                 SurName = registerDto.SurName,
+                RoleId = 2
             };
 
             var createdUser = await _userService.Register(newUser, registerDto.Password);

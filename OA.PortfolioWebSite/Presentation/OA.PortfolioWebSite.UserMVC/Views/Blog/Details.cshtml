@@ -1,0 +1,12 @@
+﻿@model OA.PortfolioWebSite.UserMVC.ViewModels.BlogPostsViewModel
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2>@Model.Title</h2>
+            <p><span>@Model.PublishDate.ToString("MMMM dd, yyyy")</span></p>
+            <img src="@Model.ImageUrl" alt="@Model.Title" class="img-fluid" />
+            <p>@Model.Content</p>
+        </div>
+    </div>
+</div>

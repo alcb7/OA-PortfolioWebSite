@@ -1,5 +1,8 @@
 using Microsoft.Extensions.Configuration;
+using OA.PortfolioWebSite.Application.Interfaces.Services;
 using OA.PortfolioWebSite.Persistance;
+using OA.PortfolioWebSite.Persistance.Contexts;
+using OA.PortfolioWebSite.Persistance.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

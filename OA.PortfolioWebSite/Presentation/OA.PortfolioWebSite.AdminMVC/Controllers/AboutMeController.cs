@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OA.PortfolioWebSite.AdminMVC.ViewModels;
 
 namespace OA.PortfolioWebSite.AdminMVC.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class AboutMeController : Controller
     {
         private readonly HttpClient _httpClient;
@@ -16,6 +18,12 @@ namespace OA.PortfolioWebSite.AdminMVC.Controllers
         public async Task<IActionResult> Index()
         {
             var aboutMe = await _httpClient.GetFromJsonAsync<AboutMeViewModel>(_apiBaseUrl + "/1");
+           // aboutMe.ImageUrl1 = Path.GetFileName(aboutMe.ImageUrl1);
+            //aboutMe.ImageUrl2 = Path.GetFileName(aboutMe.ImageUrl2);
+            aboutMe.ImageUrl1 = $"https://localhost:7051/api/File?fileName={Path.GetFileName(aboutMe.ImageUrl1)}";
+            aboutMe.ImageUrl2 = $"https://localhost:7051/api/File?fileName={Path.GetFileName(aboutMe.ImageUrl2)}";
+
+
             return View(aboutMe);
         }
 
@@ -23,6 +31,8 @@ namespace OA.PortfolioWebSite.AdminMVC.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var aboutMe = await _httpClient.GetFromJsonAsync<AboutMeViewModel>($"{_apiBaseUrl}/{id}");
+            aboutMe.ImageUrl1 = $"https://localhost:7051/api/File?fileName={Path.GetFileName(aboutMe.ImageUrl1)}";
+            aboutMe.ImageUrl2 = $"https://localhost:7051/api/File?fileName={Path.GetFileName(aboutMe.ImageUrl2)}";
             return View(aboutMe);
         }
 

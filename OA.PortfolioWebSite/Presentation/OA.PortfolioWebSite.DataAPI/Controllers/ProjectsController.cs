@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using OA.PortfolioWebSite.Application.DTOs;
 using OA.PortfolioWebSite.Application.Interfaces.Services;
 using OA.PortfolioWebSite.Persistance.Services;
+using System.Diagnostics;
 
 namespace OA.PortfolioWebSite.DataAPI.Controllers
 {
@@ -50,15 +51,25 @@ namespace OA.PortfolioWebSite.DataAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProjects([FromBody] ProjectsCreateDto dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var result = await _service.AddProjectsAsync(dto);
 
             if (!result.IsSuccess)
             {
+                foreach (var error in result.ValidationErrors)
+                {
+                    Debug.WriteLine($"Validation Error: {error.ErrorMessage}");
+                }
                 return BadRequest(result.ValidationErrors);
             }
 
             return CreatedAtAction(nameof(GetProjectsById), new { id = result.Value.Id }, result.Value);
         }
+
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProjects(int id, [FromBody] ProjectsUpdateDto dto)

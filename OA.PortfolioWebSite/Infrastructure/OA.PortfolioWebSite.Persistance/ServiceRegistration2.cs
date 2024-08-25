@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using FluentValidation;
+using OA.PortfolioWebSite.Persistance.Seeder;
 
 namespace OA.PortfolioWebSite.Persistance
 {
@@ -45,13 +46,13 @@ namespace OA.PortfolioWebSite.Persistance
             using (var scope = serviceProvider.CreateScope())
             {
                 var authDbContext = scope.ServiceProvider.GetRequiredService<AuthAPIDbContext>();
+                //authDbContext.Database.EnsureDeleted();
 
                 // Veritabanını sil ve yeniden oluştur
                 authDbContext.Database.EnsureCreated();
 
-              
 
-               // SeedData.Initialize(authDbContext, dataDbContext);
+                SeedAuthData.Initializeauth(authDbContext);
             }
         }
     }

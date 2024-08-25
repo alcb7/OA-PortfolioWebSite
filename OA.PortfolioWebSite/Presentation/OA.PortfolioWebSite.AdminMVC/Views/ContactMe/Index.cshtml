@@ -1,0 +1,29 @@
+﻿@model List<OA.PortfolioWebSite.AdminMVC.ViewModels.ContactMeViewModel>
+
+<!-- Create butonunu sayfanın üst kısmına ekliyoruz -->
+<div class="mb-3">
+    <a asp-action="Create" class="btn btn-success">Create New Contact</a>
+</div>
+
+@foreach (var contact in Model)
+{
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">@contact.Subject</h5>
+            <p class="card-text"><strong>From:</strong> @contact.Name (@contact.Email)</p>
+            <p class="card-text"><strong>Message:</strong> @contact.Message</p>
+            <p class="card-text"><strong>Sent On:</strong> @contact.SentDate.ToString("yyyy-MM-dd HH:mm")</p>
+            <p class="card-text"><strong>Is Read:</strong> @(contact.IsRead ? "Yes" : "No")</p>
+            @if (contact.IsRead && !string.IsNullOrEmpty(contact.Reply))
+            {
+                <p class="card-text"><strong>Reply:</strong> @contact.Reply</p>
+                <p class="card-text"><strong>Reply Date:</strong> @contact.ReplyDate?.ToString("yyyy-MM-dd HH:mm")</p>
+            }
+
+            <a asp-action="Edit" asp-route-id="@contact.Id" class="btn btn-primary">Edit</a>
+            <form asp-action="Delete" asp-route-id="@contact.Id" method="post" style="display:inline;">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
+}

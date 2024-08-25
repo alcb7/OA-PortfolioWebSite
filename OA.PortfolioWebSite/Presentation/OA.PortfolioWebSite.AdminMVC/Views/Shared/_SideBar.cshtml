@@ -6,58 +6,63 @@
             <ul>
                 <li class="menu-title">Arayüz</li>
                 <li class="active">
-                    <a asp-controller="AdminHome" asp-action="Index"> <i class="fa fa-edit"></i> <span>Ana Sayfa</span></a>
+                    <a asp-controller="Home" asp-action="Index"> <i class="fa fa-edit"></i> <span>Ana Sayfa</span></a>
                 </li>
                 <li class="submenu">
                     <a href="#"><i class="fa fa-edit"></i> <span>AboutMe</span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
-                        <li><a asp-controller="AdminAbout" asp-action="Index">Göster</a></li>
-                        <li><a asp-controller="AdminAbout" asp-action="UpdateAbout">Düzenle</a></li>
+                        <li><a asp-controller="AboutMe" asp-action="Index">Göster</a></li>
+                        <li><a asp-controller="AboutMe" asp-action="UpdateAbout">Düzenle</a></li>
                     </ul>
                 </li>
                 <li class="submenu">
                     <a href="#"><i class="fa fa-edit"></i> <span>Personel Info</span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
-                        <li><a asp-controller="AdminContact" asp-action="Index">Göster</a></li>
+                        <li><a asp-controller="PersonelInfo" asp-action="Index">Göster</a></li>
                     </ul>
                 </li>
                 <li class="submenu">
                     <a href="#"><i class="fa fa-edit"></i> <span>Resume</span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
-                        <li><a asp-controller="AdminBlog" asp-action="Index">Blog</a></li>
-                        <li><a asp-controller="AdminBlog" asp-action="AddBlogs">Blog Ekle</a></li>
+                        <li><a asp-controller="Educations" asp-action="Index">Göster</a></li>
+                        <li><a asp-controller="Educations" asp-action="Add">Ekle</a></li>
                     </ul>
                 </li>
                 <li class="submenu">
                     <a href="#"><i class="fa fa-edit"></i> <span>Services</span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
-                        <li><a a asp-controller="AdminYedek" asp-action="Index">Yedek Parçalar </a></li>
+                        <li><a asp-controller="Services" asp-action="Index">Göster</a></li>
+                        <li><a asp-controller="Services" asp-action="AddService">Ekle</a></li>
                     </ul>
                 </li>
                 <li class="submenu">
                     <a href="#"><i class="fa fa-edit"></i> <span>Skills</span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
-                        <li><a a asp-controller="AdminYedek" asp-action="Index">Yedek Parçalar </a></li>
+                        <li><a asp-controller="Skills" asp-action="Index">Göster</a></li>
+                        <li><a asp-controller="Skills" asp-action="AddSkill">Ekle</a></li>
                     </ul>
                 </li>
                 <li class="submenu">
                     <a href="#"><i class="fa fa-edit"></i> <span>Projects</span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
-                        <li><a a asp-controller="AdminYedek" asp-action="Index">Yedek Parçalar </a></li>
+                        <li><a asp-controller="Projects" asp-action="Index">Göster</a></li>
+                        <li><a asp-controller="Projects" asp-action="AddProject">Ekle</a></li>
                     </ul>
                 </li>
                 <li class="submenu">
                     <a href="#"><i class="fa fa-edit"></i> <span>Blogs</span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
-                        <li><a a asp-controller="AdminYedek" asp-action="Index">Yedek Parçalar </a></li>
+                        <li><a asp-controller="Blog" asp-action="Index">Göster</a></li>
+                        <li><a asp-controller="Blog" asp-action="AddBlog">Blog Ekle</a></li>
                     </ul>
                 </li>
                 <li class="submenu">
                     <a href="#"><i class="fa fa-edit"></i> <span>ContactMe</span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
-                        <li><a a asp-controller="AdminYedek" asp-action="Index">Yedek Parçalar </a></li>
+                        <li><a asp-controller="ContactMe" asp-action="Index">Göster</a></li>
+                        <li><a asp-controller="ContactMe" asp-action="AddContact">Ekle</a></li>
                     </ul>
-                </li> 
+                </li>
             </ul>
         </div>
     </div>

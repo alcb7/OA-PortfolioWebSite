@@ -1,0 +1,8 @@
+﻿namespace OA.PortfolioWebSite.AdminMVC.Response
+{
+    public class TokenResponse
+    {
+        public string Token { get; set; }
+
+    }
+}

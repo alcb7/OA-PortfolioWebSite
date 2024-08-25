@@ -1,0 +1,20 @@
+﻿@model OA.PortfolioWebSite.AdminMVC.ViewModels.ProjectViewModel
+
+<form asp-action="Edit" asp-controller="Projects" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="ImageUrl">Current Image:</label>
+        <div class="img-thumbnail" style="background-image:url('https://localhost:7051/api/File?fileName=@Model.ImageUrl'); height: 200px; background-size: cover;">
+            <!-- Resim alanı boş bırakıldı, sadece arka plan resmi kullanıldı -->
+        </div>
+        <input type="file" class="form-control" name="image">
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
