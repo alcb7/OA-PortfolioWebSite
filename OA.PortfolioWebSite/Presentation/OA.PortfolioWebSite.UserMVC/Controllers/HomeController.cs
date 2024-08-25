@@ -10,11 +10,11 @@ namespace OA.PortfolioWebSite.UserMVC.Controllers
     public class HomeController : Controller
     {
         private readonly HttpClient _httpClient;
-        private readonly string _apiPersonelInfoUrl = "https://localhost:7260/api/PersonalInfo/1";
-        private readonly string _apiAboutMeUrl = "https://localhost:7260/api/AboutMe/1";
-        private readonly string _apiEducationsUrl = "https://localhost:7260/api/Educations";
-        private readonly string _apiContactUrl = "https://localhost:7260/api/PostContactMessage";
-        private readonly string _apiblogposttUrl = "https://localhost:7260/api/BlogPosts";
+        private readonly string _apiPersonelInfoUrl = "https://dataapi.digigokali.com.tr/api/PersonalInfo/1";
+        private readonly string _apiAboutMeUrl = "https://dataapi.digigokali.com.tr/api/AboutMe/1";
+        private readonly string _apiEducationsUrl = "https://dataapi.digigokali.com.tr/api/Educations";
+        private readonly string _apiContactUrl = "https://dataapi.digigokali.com.tr/api/PostContactMessage";
+        private readonly string _apiblogposttUrl = "https://dataapi.digigokali.com.tr/api/BlogPosts";
         public HomeController(HttpClient httpClient)
         {
             _httpClient = httpClient;
@@ -32,7 +32,7 @@ namespace OA.PortfolioWebSite.UserMVC.Controllers
             aboutMeResponse.ImageUrl2 = Path.GetFileName(aboutMeResponse.ImageUrl2);
             foreach (var blogPost in blogPostResponse)
             {
-                blogPost.ImageUrl = $"https://localhost:7051/api/File?fileName={Path.GetFileName(blogPost.ImageUrl)}";
+                blogPost.ImageUrl = $"https://fileapi.digigokali.com.tr/api/File?fileName={Path.GetFileName(blogPost.ImageUrl)}";
             }
 
             var viewModel = new HomeViewModel
@@ -49,7 +49,7 @@ namespace OA.PortfolioWebSite.UserMVC.Controllers
         [HttpGet]
         public async Task<IActionResult> DownloadCV()
         {
-            var apiUrl = "https://localhost:7051/api/file/download-cv";
+            var apiUrl = "https://fileapi.digigokali.com.tr/api/file/download-cv";
 
             var response = await _httpClient.GetAsync(apiUrl);
 

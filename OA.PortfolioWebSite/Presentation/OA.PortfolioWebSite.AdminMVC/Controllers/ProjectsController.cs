@@ -8,7 +8,7 @@ namespace OA.PortfolioWebSite.AdminMVC.Controllers
     public class ProjectsController : Controller
     {
         private readonly HttpClient _httpClient;
-        private readonly string _apiBaseUrl = "https://localhost:7260/api/Projects";
+        private readonly string _apiBaseUrl = "https://dataapi.digigokali.com.tr/api/Projects";
 
         public ProjectsController(HttpClient httpClient)
         {
@@ -22,7 +22,7 @@ namespace OA.PortfolioWebSite.AdminMVC.Controllers
             // Her proje için ImageUrl'yi tam URL'ye çeviriyoruz
             foreach (var project in projects)
             {
-                project.ImageUrl = $"https://localhost:7051/api/File?fileName={Path.GetFileName(project.ImageUrl)}";
+                project.ImageUrl = $"https://fileapi.digigokali.com.tr/api/File?fileName={Path.GetFileName(project.ImageUrl)}";
             }
 
             return View(projects);
@@ -55,7 +55,7 @@ namespace OA.PortfolioWebSite.AdminMVC.Controllers
             {
                 if (image != null)
                 {
-                    var response = await _httpClient.PostAsync("https://localhost:7051/api/File/upload", new MultipartFormDataContent
+                    var response = await _httpClient.PostAsync("https://fileapi.digigokali.com.tr/api/File/upload", new MultipartFormDataContent
                     {
                         { new StreamContent(image.OpenReadStream()), "file", image.FileName }
                     });
@@ -90,7 +90,7 @@ namespace OA.PortfolioWebSite.AdminMVC.Controllers
             {
                 if (image != null)
                 {
-                    var response = await _httpClient.PostAsync("https://localhost:7051/api/File/upload", new MultipartFormDataContent
+                    var response = await _httpClient.PostAsync("https://fileapi.digigokali.com.tr/api/File/upload", new MultipartFormDataContent
                     {
                         { new StreamContent(image.OpenReadStream()), "file", image.FileName }
                     });

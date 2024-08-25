@@ -1,16 +1,39 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using OA.PortfolioWebSite.Persistance;
+using OA.PortfolioWebSite.Application.Interfaces.Services;
+using OA.PortfolioWebSite.Persistance.Contexts;
+using OA.PortfolioWebSite.Persistance.Services;
+using System.Text;
+using OA.PortfolioWebSite.Application.Interfaces.Repositories;
+using OA.PortfolioWebSite.Persistance.Seeder;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
 
-// Register your persistence services
-ServiceRegistration2.AddPersistenceServices2(builder.Services);
+// Veritabaný baðlantý dizesini yapýlandýrýyoruz
+string authConnectionString = builder.Configuration.GetConnectionString("AuthConnection");
 
+// DbContext'i ekliyoruz
+builder.Services.AddDbContext<AuthAPIDbContext>(options =>
+    options.UseSqlServer(authConnectionString));
+
+// Diðer servisleri ekliyoruz
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
+
+// Veritabaný baþlangýç iþlemleri
+using (var scope = builder.Services.BuildServiceProvider().CreateScope())
+{
+    var authDbContext = scope.ServiceProvider.GetRequiredService<AuthAPIDbContext>();
+    authDbContext.Database.EnsureCreated();
+    SeedAuthData.Initializeauth(authDbContext);
+}
+
+// JWT authentication'ý yapýlandýrýyoruz
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -30,13 +53,13 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Swagger yapýlandýrmasý
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Middleware ayarlarý
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -44,10 +67,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

@@ -8,7 +8,7 @@ namespace OA.PortfolioWebSite.AdminMVC.Controllers
     public class AboutMeController : Controller
     {
         private readonly HttpClient _httpClient;
-        private readonly string _apiBaseUrl = "https://localhost:7260/api/AboutMe";
+        private readonly string _apiBaseUrl = "https://dataapi.digigokali.com.tr/api/AboutMe";
 
         public AboutMeController(HttpClient httpClient)
         {
@@ -20,8 +20,8 @@ namespace OA.PortfolioWebSite.AdminMVC.Controllers
             var aboutMe = await _httpClient.GetFromJsonAsync<AboutMeViewModel>(_apiBaseUrl + "/1");
            // aboutMe.ImageUrl1 = Path.GetFileName(aboutMe.ImageUrl1);
             //aboutMe.ImageUrl2 = Path.GetFileName(aboutMe.ImageUrl2);
-            aboutMe.ImageUrl1 = $"https://localhost:7051/api/File?fileName={Path.GetFileName(aboutMe.ImageUrl1)}";
-            aboutMe.ImageUrl2 = $"https://localhost:7051/api/File?fileName={Path.GetFileName(aboutMe.ImageUrl2)}";
+            aboutMe.ImageUrl1 = $"https://fileapi.digigokali.com.tr/api/File?fileName={Path.GetFileName(aboutMe.ImageUrl1)}";
+            aboutMe.ImageUrl2 = $"https://fileapi.digigokali.com.trapi/File?fileName={Path.GetFileName(aboutMe.ImageUrl2)}";
 
 
             return View(aboutMe);
@@ -31,8 +31,8 @@ namespace OA.PortfolioWebSite.AdminMVC.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var aboutMe = await _httpClient.GetFromJsonAsync<AboutMeViewModel>($"{_apiBaseUrl}/{id}");
-            aboutMe.ImageUrl1 = $"https://localhost:7051/api/File?fileName={Path.GetFileName(aboutMe.ImageUrl1)}";
-            aboutMe.ImageUrl2 = $"https://localhost:7051/api/File?fileName={Path.GetFileName(aboutMe.ImageUrl2)}";
+            aboutMe.ImageUrl1 = $"https://fileapi.digigokali.com.tr/api/File?fileName={Path.GetFileName(aboutMe.ImageUrl1)}";
+            aboutMe.ImageUrl2 = $"https://fileapi.digigokali.com.tr/api/File?fileName={Path.GetFileName(aboutMe.ImageUrl2)}";
             return View(aboutMe);
         }
 
@@ -48,7 +48,7 @@ namespace OA.PortfolioWebSite.AdminMVC.Controllers
             {
                 if (image1 != null)
                 {
-                    var response = await _httpClient.PostAsync("https://localhost:7051/api/File/upload", new MultipartFormDataContent
+                    var response = await _httpClient.PostAsync("https://fileapi.digigokali.com.tr/api/File/upload", new MultipartFormDataContent
             {
                 { new StreamContent(image1.OpenReadStream()), "file", image1.FileName }
             });
@@ -62,7 +62,7 @@ namespace OA.PortfolioWebSite.AdminMVC.Controllers
 
                 if (image2 != null)
                 {
-                    var response = await _httpClient.PostAsync("https://localhost:7051/api/File/upload", new MultipartFormDataContent
+                    var response = await _httpClient.PostAsync("https://fileapi.digigokali.com.tr/api/File/upload", new MultipartFormDataContent
             {
                 { new StreamContent(image2.OpenReadStream()), "file", image2.FileName }
             });

@@ -8,7 +8,7 @@ namespace OA.PortfolioWebSite.AdminMVC.Controllers
     public class ContactMeController : Controller
     {
         private readonly HttpClient _httpClient;
-        private readonly string _apiBaseUrl = "https://localhost:7260/api/ContactMessages";
+        private readonly string _apiBaseUrl = "https://dataapi.digigokali.com.tr/api/ContactMessages";
 
         public ContactMeController(HttpClient httpClient)
         {

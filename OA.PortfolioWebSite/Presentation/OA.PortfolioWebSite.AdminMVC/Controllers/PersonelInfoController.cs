@@ -8,7 +8,7 @@ namespace OA.PortfolioWebSite.AdminMVC.Controllers
     public class PersonelInfoController : Controller
     {
         private readonly HttpClient _httpClient;
-        private readonly string _apiBaseUrl = "https://localhost:7260/api/PersonalInfo";
+        private readonly string _apiBaseUrl = "https://dataapi.digigokali.com.tr/api/PersonalInfo";
 
         public PersonelInfoController(HttpClient httpClient)
         {

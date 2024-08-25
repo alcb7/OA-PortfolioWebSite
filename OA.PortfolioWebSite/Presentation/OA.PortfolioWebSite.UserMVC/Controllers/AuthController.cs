@@ -8,7 +8,7 @@ namespace OA.PortfolioWebSite.UserMVC.Controllers
     public class AuthController : Controller
     {
         private readonly HttpClient _httpClient;
-        private readonly string _authApiUrl = "https://localhost:7281/api/Auth";
+        private readonly string _authApiUrl = "https://authapi.digigokali.com.tr/api/Auth";
 
         public AuthController(HttpClient httpClient)
         {
