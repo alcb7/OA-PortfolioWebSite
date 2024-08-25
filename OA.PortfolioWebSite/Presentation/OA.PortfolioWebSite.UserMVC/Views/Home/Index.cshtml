@@ -278,7 +278,12 @@
                                     <a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
                                 </p>
                             </div>
-                            <h3 class="heading"><a href="single.html">@blogPost.Title</a></h3>
+                            <h3 class="heading">
+                                <a asp-controller="Blog" asp-action="Details" asp-route-id="@blogPost.Id">
+                                    @blogPost.Title
+                                </a>
+                            </h3>
+
                             <p>@blogPost.Content</p>
                         </div>
                     </div>
