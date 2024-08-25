@@ -26,12 +26,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 
 // Veritabaný baþlangýç iþlemleri
-using (var scope = builder.Services.BuildServiceProvider().CreateScope())
-{
-    var authDbContext = scope.ServiceProvider.GetRequiredService<AuthAPIDbContext>();
-    authDbContext.Database.EnsureCreated();
-    SeedAuthData.Initializeauth(authDbContext);
-}
+
 
 // JWT authentication'ý yapýlandýrýyoruz
 builder.Services.AddAuthentication(options =>

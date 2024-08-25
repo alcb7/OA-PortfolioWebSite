@@ -59,12 +59,7 @@ builder.Services.AddScoped<ISendContactService, SendContactService>(provider =>
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 // Veritabaný baþlangýç iþlemleri
-using (var scope = builder.Services.BuildServiceProvider().CreateScope())
-{
-    var dataDbContext = scope.ServiceProvider.GetRequiredService<DataAPIDbContext>();
-    dataDbContext.Database.EnsureCreated();
-    SeedData.Initialize(dataDbContext);
-}
+
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
